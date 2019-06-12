@@ -1,0 +1,196 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jenkins-ci
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: jenkins-ci
+  namespace: jenkins-ci
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: jenkins-ci
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: jenkins-ci
+  namespace: jenkins-ci
+---
+# 设置两个pv，一个用于作为workspace，一个用于存储ssh key
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+    name: jenkins-home
+    labels:
+      release: jenkins-home
+    namespace: jenkins-ci
+spec:
+    # workspace 大小为10G
+    capacity:
+      storage: 5Gi
+    accessModes:
+      - ReadWriteMany
+    persistentVolumeReclaimPolicy: Retain
+    #需要注意，必须先创建目录 /home/nfs/jenkins
+    nfs:
+      path: /home/nfs/jenkins
+      server: 172.16.134.56
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+    name: jenkins-ssh
+    labels:
+      release: jenkins-ssh
+    namespace: jenkins-ci
+spec:
+    # ssh key 只需要1M空间即可
+    capacity:
+      storage: 1Mi
+    accessModes:
+      - ReadWriteMany
+    persistentVolumeReclaimPolicy: Retain
+    # 创建目录 /home/nfs/jenkinsssh
+    nfs:
+      path: /home/nfs/jenkinsssh
+      server: 172.16.134.56
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jenkins-home-claim
+  namespace: jenkins-ci
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:  
+    requests:
+      storage: 5Gi
+  selector:
+    matchLabels:
+      release: jenkins-home
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: jenkins-ssh-claim
+  namespace: jenkins-ci
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:  
+    requests:
+      storage: 1Mi
+  selector:
+    matchLabels:
+      release: jenkins-ssh
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+ name: jenkins
+ namespace: jenkins-ci
+spec:
+ replicas: 1
+ template:
+  metadata:
+   labels:
+    name: jenkins
+  spec:
+   serviceAccount: jenkins-ci
+   containers:
+   - name: jenkins
+     imagePullPolicy: Always
+     # 使用1.1小结创建的 Jenkins Master 镜像
+     image: jenkins/jenkins:2.179
+     # 资源管理，详见第二章
+     resources:
+      limits:
+        cpu: 1
+        memory: 2Gi
+      requests:
+        cpu: 0.5
+        memory: 1Gi
+     # 开放8080端口用于访问，开放50000端口用于Jenkins Slave和Master的通讯
+     ports:
+       - containerPort: 8080
+       - containerPort: 50000
+     readinessProbe:
+      tcpSocket:
+        port: 8080
+      initialDelaySeconds: 40
+      periodSeconds: 20
+     securityContext:
+       privileged: true
+     volumeMounts:
+         # 映射K8S Node的docker，也就是docker outside docker，这样就不需要在Jenkins里面安装docker
+       - mountPath: /var/run/docker.sock
+         name: docker-sock
+       - mountPath: /usr/bin/docker
+         name: docker-bin
+       - mountPath: /var/jenkins_home
+         name: jenkins-home
+       - mountPath: /root/.ssh
+         name: jenkins-ssh
+       - mountPath: /etc/localtime
+         name: host-time
+   volumes:
+     - name: host-time
+       hostPath:
+         path: /etc/localtime
+     - name: docker-sock
+       hostPath:
+         path: /var/run/docker.sock
+     - name: docker-bin
+       hostPath:
+         path: /usr/bin/docker
+     - name: jenkins-home
+       persistentVolumeClaim:
+          claimName: jenkins-home-claim
+     - name: jenkins-ssh
+       persistentVolumeClaim:
+          claimName: jenkins-ssh-claim
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: jenkins-service
+  namespace: jenkins-ci
+spec:
+  type: NodePort
+  selector:
+    name: jenkins
+  # 将Jenkins Master的50000端口作为NodePort映射到K8S的30001端口
+  ports:
+  - name: jenkins-agent
+    port: 50000
+    targetPort: 50000
+    nodePort: 30001
+  - name: jenkins
+    port: 8080
+    targetPort: 8080
+    nodePort: 30050
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+ name: jenkins-ingress
+ namespace: jenkins-ci
+ annotations:
+      kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+  # 设置Ingress-Nginx域名和端口
+  - host: jenkins.k8s.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: jenkins-service
+          servicePort: 8080

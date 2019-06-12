@@ -1,0 +1,76 @@
+#################################################################################################################
+# Define the settings for the rook-ceph cluster with common settings for a production cluster.
+# All nodes with available raw devices will be used for the Ceph cluster. At least three nodes are required
+# in this example. See the documentation for more details on storage settings available.
+
+# For example, to create the cluster:
+#   kubectl create -f common.yaml
+#   kubectl create -f operator.yaml
+#   kubectl create -f cluster.yaml
+#################################################################################################################
+
+apiVersion: ceph.rook.io/v1
+kind: CephCluster
+metadata:
+  name: rook-ceph
+  namespace: rook-ceph
+spec:
+  cephVersion:
+    image: ceph/ceph:v14.2.1-20190430
+    allowUnsupported: false
+  dataDirHostPath: /var/lib/rook
+  mon:
+    count: 3
+    allowMultiplePerNode: true
+  dashboard:
+    enabled: true
+  network:
+    hostNetwork: false
+  placement:
+    mon:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: ceph-mon
+              operator: In
+              values:
+              - enabled
+    osd:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: ceph-osd
+              operator: In
+              values:
+              - enabled
+    mgr:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: ceph-mgr
+              operator: In
+              values:
+              - enabled
+  rbdMirroring:
+    workers: 0
+    mgr:
+  annotations:
+  resources:
+  storage: 
+    useAllNodes: false
+    useAllDevices: false
+    deviceFilter:
+    location:
+    config:
+      databaseSizeMB: "30720" 
+      osdsPerDevice: "1"
+    nodes:
+    - name: "kube-linux-70"
+      devices: 
+      - name: "sdb"
+    - name: "kube-linux-77"
+      devices: 
+      - name: "sdb"

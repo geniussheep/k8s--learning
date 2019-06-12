@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: benlai-config-service
+  labels:
+    app: benlai-config-service
+spec:
+  ports:
+  - port: 10083
+    targetPort: 10083
+    protocol: TCP
+  selector:
+    app: benlai-config-service
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: benlai-config-service
+  name: benlai-config-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: benlai-config-service
+      name: benlai-config-service
+    spec:
+      containers:
+      - name: windowssoaservice
+        image: harbor.ibenlai.com/benlai-p2c/config.service:v1.0
+        ports:
+        - containerPort: 10083
+      nodeSelector:
+        beta.kubernetes.io/os: windows
+      tolerations:
+        - key: "apps/os"
+          operator: "Equal"
+          value: "windows"
+          effect: "NoSchedule"
+        - key: "apps/os"
+          operator: "Equal"
+          value: "windows"
+          effect: "NoExecute"

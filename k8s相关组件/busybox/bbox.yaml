@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bbox-svc
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+    protocol: TCP
+  selector:
+    app: bbox
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: bbox-pv-claim
+  labels:
+    app: bbox
+spec:
+  storageClassName: rook-ceph-block
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: bbox-deploy
+  labels:
+    app: bbox
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: bbox
+      labels:
+        app: bbox
+    spec:
+      containers:
+      - name: bbox
+        image: busybox:latest
+        command: ["httpd", "-f", "-h", "/data/html"]
+        volumeMounts:
+        - name: bbox-volume
+          mountPath: "/data/html"
+      volumes:
+      - name: bbox-volume
+        persistentVolumeClaim:
+          claimName: bbox-pv-claim

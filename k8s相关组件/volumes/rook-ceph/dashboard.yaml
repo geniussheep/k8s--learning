@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: rook-ceph-mgr-dashboard
+  namespace: rook-ceph
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/server-snippet: |
+      proxy_ssl_verify off;
+spec:
+  tls:
+   - hosts:
+     - rook-ceph.ibenlai.com
+     secretName: rook-ceph.ibenlai.com
+  rules:
+  - host: rook-ceph.ibenlai.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: rook-ceph-mgr-dashboard
+          servicePort: https-dashboard
