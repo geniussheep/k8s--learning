@@ -1,0 +1,152 @@
+pipeline {
+    /*
+    * Run everything on an existing agent configured with a label 'docker'.
+    * This agent will need docker, git and a jdk installed at a minimum.
+    */
+    agent {
+        node {
+            label 'jenkins-slave-linux'
+            //customWorkspace '/home/jenkins/ws/'
+        }
+    }
+    stages{
+        // stage("Create WorkSpace"){
+        //     steps{
+        //         sh "cd /home/jenkins/"
+        //         sh 'if [ ! -d "ws" ]; then mkdir -p ws fi'
+        //         sh 'cd ws'
+        //     }
+        // }
+        
+        stage('Check Out Code'){
+            steps{
+                //check CODE
+                echo 'Checkout==========》》》'
+                sh 'pwd'
+                checkout([
+                    $class: 'SubversionSCM', 
+                    additionalCredentials: [], 
+                    excludedCommitMessages: '', 
+                    excludedRegions: '', 
+                    excludedRevprop: '', 
+                    excludedUsers: '', 
+                    filterChangelog: false, 
+                    ignoreDirPropChanges: false, 
+                    includedRegions: '', 
+                    locations: [
+                        [cancelProcessOnExternalsFail: true, 
+                        credentialsId: 'f0853a4e-197d-42f7-976d-1aee831f1c3d', 
+                        depthOption: 'infinity', 
+                        ignoreExternalsOption: true, 
+                        local: '.', 
+                        remote: 'https://svn.benlailife.com/svn/Benlai.Architecture.Java/trunk/Benlai.AutoPublish@HEAD'
+                        ]
+                    ], 
+                    quietOperation: true, 
+                    workspaceUpdater: [$class: 'UpdateUpdater']
+                ])
+            }
+        }
+
+        stage('Maven Build') {
+            agent {
+                docker {
+                    image 'maven:3-jdk-8-alpine'
+                    args '-v $HOME/.m2:/root/.m2'
+                }
+            }
+            steps {
+                echo 'start build...' 
+                sh ' clean package -T 1C -Dmaven.test.skip=true'
+                stash includes: 'target/*.jar', name: 'app'
+            }
+        }
+
+        stage('Docker Build') {
+
+            agent any
+            steps {
+                unstash 'app'
+                // sh "docker login -u ${HARBOR_CREDS_USR} -p ${HARBOR_CREDS_PSW} ${params.HARBOR_HOST}"
+                // sh "docker build --build-arg JAR_FILE=`ls target/*.jar |cut -d '/' -f2` -t ${params.HARBOR_HOST}/${params.DOCKER_IMAGE}:${GIT_TAG} ."
+                // sh "docker push ${params.HARBOR_HOST}/${params.DOCKER_IMAGE}:${GIT_TAG}"
+                // sh "docker rmi ${params.HARBOR_HOST}/${params.DOCKER_IMAGE}:${GIT_TAG}"
+            }
+        }
+    }
+}
+
+node('jenkins-slave-linux'){
+    stage('check out code'){
+        //check CODE
+        echo 'Checkout==========》》》'
+        checkout([
+            $class: 'SubversionSCM', 
+            additionalCredentials: [], 
+            excludedCommitMessages: '', 
+            excludedRegions: '', 
+            excludedRevprop: '', 
+            excludedUsers: '', 
+            filterChangelog: false, 
+            ignoreDirPropChanges: false, 
+            includedRegions: '', 
+            locations: [
+                [cancelProcessOnExternalsFail: true, 
+                credentialsId: 'f0853a4e-197d-42f7-976d-1aee831f1c3d', 
+                depthOption: 'infinity', 
+                ignoreExternalsOption: true, 
+                local: '.', 
+                remote: 'https://svn.benlailife.com/svn/Benlai.Architecture.Java/trunk/Benlai.AutoPublish@$Version'
+                ]
+            ], 
+            quietOperation: true, 
+            workspaceUpdater: [$class: 'UpdateUpdater']
+        ])
+    }
+
+    stage('mvn build'){
+        //mvn构建
+        docker.image('maven:3-jdk-8-alpine').inside('-v $HOME/.m2:/root/.m2') {
+            sh 'mvn clean package -Dfile.encoding=UTF-8 -DskipTests=true'
+        }
+    }
+
+    stage('deploy'){
+        //执行部署脚本
+        echo "deploy ......" 
+    }
+}
+
+node{
+    stage('get clone'){
+        //check CODE
+        echo 'Checkout==========》》》'
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://source.enncloud.cn/qinzhao/spring-boot-demo.git']]])
+    }
+
+    //定义mvn环境
+    def mvnHome = tool 'maven3.5.3'
+    env.PATH = "${mvnHome}/bin:${env.PATH}"
+
+    stage('mvn test'){
+        //mvn 测试
+        sh "mvn test"
+    }
+
+    stage('mvn build'){
+        //mvn构建
+        sh "mvn clean install -Dmaven.test.skip=true"
+    }
+
+    stage('deploy'){
+        //执行部署脚本
+        sh "ls -l target"
+        echo "deploy ......" 
+    }
+    def dockerfile = 'Dockerfile'
+    def customImage = docker.build("10.39.47.22/qinzhao/demo:v1.0", "-f ${dockerfile} .")
+    customImage.push()
+
+}
+
+

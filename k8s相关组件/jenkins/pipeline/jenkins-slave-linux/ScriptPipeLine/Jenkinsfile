@@ -1,0 +1,56 @@
+node ('jenkins-slave-linux'){
+    
+    parameters{
+    }
+
+    stage('clear workspace'){
+        sh "pwd"
+        sh "rm -rf *"
+    }
+    stage("checkout code"){
+        // checkout(
+        //     [
+        //         $class: 'SubversionSCM', 
+        //         additionalCredentials: [], 
+        //         excludedCommitMessages: '', 
+        //         excludedRegions: '', 
+        //         excludedRevprop: '', 
+        //         excludedUsers: '', 
+        //         filterChangelog: false, 
+        //         ignoreDirPropChanges: false, 
+        //         includedRegions: '', 
+        //         locations: [
+        //             [
+        //                 cancelProcessOnExternalsFail: true, 
+        //                 credentialsId: '7b1779cc-6f9b-4f21-9dc6-f6b760783069', 
+        //                 depthOption: 'infinity', 
+        //                 ignoreExternalsOption: true, 
+        //                 local: '.', 
+        //                 remote: 'https://svn.benlailife.com/svn/Benlai.Architecture.Java/trunk/Benlai.AutoPublish@head'
+        //             ]
+        //         ], 
+        //         quietOperation: true, 
+        //         workspaceUpdater: [$class: 'UpdateUpdater']
+        //     ]
+        // )
+        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '05b8e78b-2488-4507-8802-abb82e2eb9ce', url: 'https://gitlab.benlai.work/java/bdk-data-examples.git']]])
+    }
+    def mvnHome = tool 'maven' //此处需要jenkins配置全局工具 参见  https://blog.csdn.net/qq_35299863/article/details/84329798
+    def jdkHome = tool 'java_1.8.0_212'
+    env.PATH = "${mvnHome}/bin;${jdkHome}/bin;${env.PATH}"
+    env.GIT_TAG = sh(returnStdout: true,script: 'git describe --tags').trim();
+    stage("mvc build"){
+        sh 'mvc clean package -T 1C -Dmaven.test.skip=true'
+    }
+
+    stage("download Dockerfile"){
+        sh 'echo "wget dockerfile url..."'
+    }
+
+    stage('build and push images'){
+        // withDockerRegistry(credentialsId: '', url: 'https://harbor.ibenlai.com'){
+        //     def dockerfile = 'Dockerfile'
+        //     def customImage = docker.build("harbor.ibenlai.com/${env.JOB_NAME}:${env.GIT_TAG}", "-f ${dockerfile} .")
+        // }
+    }
+}
