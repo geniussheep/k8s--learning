@@ -23,9 +23,9 @@ node ('jenkins-slave-linux'){
     }
 
     stage('build and push images'){
-        // withDockerRegistry(credentialsId: '', url: 'https://harbor.ibenlai.com'){
-        //     def dockerfile = 'Dockerfile'
-        //     def customImage = docker.build("harbor.ibenlai.com/${env.JOB_NAME}:${env.GIT_TAG}", "-f ${dockerfile} .")
-        // }
+        // This step should not normally be used in your script. Consult the inline help for details.
+        withDockerRegistry(credentialsId: '7f0fbed4-24f1-4f3e-8a87-60ee90f23cc8', url: 'https://harbor.ibenlai.com') {
+            // some block
+        }
     }
 }

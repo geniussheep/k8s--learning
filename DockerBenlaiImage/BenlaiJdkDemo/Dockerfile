@@ -4,7 +4,7 @@ ENV BENLAI_JDK_DEMO_NAME="benlai.jdk.demo"
 
 LABEL author="sheep.yang" \
 	app.name="benlai.jdk.demo" \
-	app.service.name=${BENLAI_JDK_DEMO_NAME} \
+	app.service.name=${BENLAI_JDK_DEMO_NAME}
 
 WORKDIR /usr/local/app
 
