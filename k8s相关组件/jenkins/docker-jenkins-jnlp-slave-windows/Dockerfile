@@ -21,3 +21,5 @@ ARG BASE_URL
 RUN (New-Object System.Net.WebClient).DownloadFile('{0}/jnlpJars/slave.jar' -f $env:BASE_URL, 'slave.jar') ;
 
 ENTRYPOINT ["c:\\Java\\jdk1.8.0_212\\bin\\java.exe", "-jar", ".\\slave.jar"]
+
+#在对应的机器上进行构建 jenkins-windows-slave的基础镜像：docker build --build-arg BASE_URL=http://jenkins.ibenlai.com -t jenkins-windows-slave:v1.0 .

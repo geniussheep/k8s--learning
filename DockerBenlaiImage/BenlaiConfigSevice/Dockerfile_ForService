@@ -1,0 +1,17 @@
+FROM mcr.microsoft.com/windows/servercore:1809
+
+ENV CONFIG_SERVICE_NAME="Benlai.Config.Service"
+
+LABEL author="sheep.yang" \
+	app.name="benlai.config.service" \
+	app.service.name=${CONFIG_SERVICE_NAME} \
+	app.http.port="10083"
+
+WORKDIR c:/users/app
+
+COPY app c:/users/app
+
+RUN sc create ${CONFIG_SERVICE_NAME} binPath= "C:\\users\\app\\Benlai.ConfigService.exe" 
+RUN sc config ${CONFIG_SERVICE_NAME} start=AUTO
+
+CMD  net start ${CONFIG_SERVICE_NAME}

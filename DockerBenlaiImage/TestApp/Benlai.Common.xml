@@ -1,0 +1,2449 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Benlai.Common</name>
+    </assembly>
+    <members>
+        <member name="M:Benlai.Common.MemoryCacheUnits.Set(System.String,System.Object)">
+            <summary>
+            设置缓存
+            </summary>
+            <param name="key">键</param>
+            <param name="obj">值</param>
+        </member>
+        <member name="M:Benlai.Common.MemoryCacheUnits.Set(System.String,System.Object,System.Nullable{System.DateTime})">
+            <summary>
+            设置缓存
+            </summary>
+            <param name="key">键</param>
+            <param name="obj">值</param>
+            <param name="expireTime">过期时间</param>
+        </member>
+        <member name="M:Benlai.Common.MemoryCacheUnits.Set(System.String,System.Object,System.String)">
+            <summary>
+            设置缓存
+            </summary>
+            <param name="key">键</param>
+            <param name="obj">值</param>
+            <param name="filePath">依赖文件路径修改过期</param>
+        </member>
+        <member name="M:Benlai.Common.MemoryCacheUnits.Get``1(System.String)">
+            <summary>
+            获取对象
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.MemoryCacheUnits.IsExists(System.String)">
+            <summary>
+            判断是否存在
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.DataValidator.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.DataValidator.Valid">
+            <summary>
+            验证
+            </summary>
+            <returns>验证结果</returns>
+        </member>
+        <member name="M:Benlai.Common.DataValidator.IsNullOrEmpty(System.Object)">
+            <summary>
+            判断是否为空
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.DataValidator.IsDateTime(System.Object)">
+            <summary>
+            是否是日期时间
+            </summary>
+            <param name="datetime"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.DataValidator.IsNumeric(System.Object)">
+            <summary>
+            是否为数字
+            </summary>
+            <param name="value">值</param>
+            <returns>是否为数字</returns>
+        </member>
+        <member name="M:Benlai.Common.DataValidator.IsInt(System.Object)">
+            <summary>
+            判断是否为整型
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.DataValidator.IsDouble(System.Object)">
+            <summary>
+            判断是否为浮点型
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.DataValidator.IsBoolean(System.Object)">
+            <summary>
+            判断是否是布尔型
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.DataValidator.IsCustomValue(System.Object,System.String)">
+            <summary>
+            判断是否符合自定义格式
+            </summary>
+            <param name="value"></param>
+            <param name="customFormat"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.DataValidator.IsEmail(System.Object)">
+            <summary>
+            判断是否是E-mail格式
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.DataValidator.IsUrl(System.Object)">
+            <summary>
+            判断是否是Url地址
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.DataValidator.ConvertDataValidType(System.String)">
+            <summary>
+            将字符串转换成验证数据类型
+            </summary>
+            <param name="dataValidTypeString"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Benlai.Common.DataValidator.Name">
+            <summary>
+            需验证值的名称
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.DataValidator.Value">
+            <summary>
+            需验证的值
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.DataValidator.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.DataValidator.ResultMessage">
+            <summary>
+            验证结果信息
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.DataValidator.AllowNull">
+            <summary>
+            是否允许空字符
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.DataValidator.DataType">
+            <summary>
+            要求的数据类型
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.DataValidator.CustomFormat">
+            <summary>
+            自定义格式
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.DataValidator.MinValue">
+            <summary>
+            最小值
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.DataValidator.MaxValue">
+            <summary>
+            最大值
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.DataValidatorsBuilder.FillValidators(System.String)">
+            <summary>
+            填充验证依据组
+            </summary>
+            <param name="validDataText">需验证依据组字符数据，格式:
+                                            参数名|是否允许空|验证数据类型,
+                                            参数名|是否允许空|验证数据类型</param>
+        </member>
+        <member name="M:Benlai.Common.DataValidatorsBuilder.FillValidators(System.String,System.Char,System.Char)">
+             <summary>
+             填充验证依据组
+             </summary>
+             <param name="validDataText">需验证依据组字符数据</param>
+            <param name="rowSplit">数据行分割符</param>
+            <param name="itemSplit">数据项分割符</param>
+        </member>
+        <member name="M:Benlai.Common.DataValidatorsBuilder.CreateDataValidator(System.String,System.String,System.String)">
+            <summary>
+            创建一个数据验证器
+            </summary>
+            <param name="name">数据名称</param>
+            <param name="allowNull">是否允许空</param>
+            <param name="dataType">需验证的数据类型</param>
+            <returns>数据验证器</returns>
+        </member>
+        <member name="M:Benlai.Common.DataValidatorsBuilder.CreateDataValidator(System.String,System.String,System.String,System.String)">
+            <summary>
+            创建一个数据验证器
+            </summary>
+            <param name="name">数据名称</param>
+            <param name="allowNull">是否允许空</param>
+            <param name="dataType">需验证的数据类型</param>
+            <param name="format">客户自定义格式或范围</param>
+            <returns>数据验证器</returns>
+        </member>
+        <member name="M:Benlai.Common.DataValidatorsBuilder.ValidDatas">
+            <summary>
+            数据验证
+            </summary>
+            <returns>验证结果</returns>
+        </member>
+        <member name="P:Benlai.Common.DataValidatorsBuilder.Count">
+            <summary>
+            获取验证依据组数量
+            </summary>
+        </member>
+        <member name="T:Benlai.Common.IdGen.DefaultTimeSource">
+            <summary>
+            Provides time data to an <see cref="T:Benlai.Common.IdGen.IdGenerator"/>. Uses the current date and time on this computer.
+            </summary>
+        </member>
+        <member name="T:Benlai.Common.IdGen.ITimeSource">
+            <summary>
+            Provides the interface for timesources that provide time information to <see cref="T:Benlai.Common.IdGen.IdGenerator"/>s.
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.IdGen.ITimeSource.GetTime">
+            <summary>
+            Returns a <see cref="T:System.DateTime"/> to be used by an <see cref="T:Benlai.Common.IdGen.IdGenerator"/> when creating an Id.
+            </summary>
+            <returns>A <see cref="T:System.DateTime"/> to be used by an <see cref="T:Benlai.Common.IdGen.IdGenerator"/> when creating an Id.</returns>
+        </member>
+        <member name="M:Benlai.Common.IdGen.DefaultTimeSource.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Benlai.Common.IdGen.DefaultTimeSource"/>.
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.IdGen.DefaultTimeSource.GetTime">
+            <summary>
+            Returns a <see cref="T:System.DateTime"/> object that is (close to) the current date and time on this computer, expressed
+            as the Coordinated Universal Time (UTC).
+            </summary>
+            <returns>
+            A <see cref="T:System.DateTime"/> object that is (close to) the current date and time on this computer, expressed as the
+            Coordinated Universal Time (UTC).
+            </returns>
+            <remarks>
+            The resolution of this value depends on the system. It does *not* rely on the system- or wall-clock time but
+            on QueryPerformanceCounter and *may* (and *will*) drift ahead of time over time.
+            </remarks>
+        </member>
+        <member name="M:Benlai.Common.IdGen.DefaultTimeSource.Benlai#Common#IdGen#ITimeSource#GetTime">
+            <summary>
+            Returns a <see cref="T:System.DateTime"/> object that is (close to) the current date and time on this computer, expressed
+            as the Coordinated Universal Time (UTC).
+            </summary>
+            <returns>
+            A <see cref="T:System.DateTime"/> object that is (close to) the current date and time on this computer, expressed as the
+            Coordinated Universal Time (UTC).
+            </returns>
+            <remarks>
+            The resolution of this value depends on the system. It does *not* rely on the system- or wall-clock time but
+            on QueryPerformanceCounter and *may* (and *will*) drift ahead of time over time.
+            </remarks>
+        </member>
+        <member name="T:Benlai.Common.IdGen.IdGenerator">
+            <summary>
+            Generates Id's inspired by Twitter's (late) Snowflake project.
+            </summary>
+        </member>
+        <member name="T:Benlai.Common.IdGen.IIdGenerator`1">
+            <summary>
+            Provides the interface for Id-generators.
+            </summary>
+            <typeparam name="T">The type for the generated ID's.</typeparam>
+        </member>
+        <member name="M:Benlai.Common.IdGen.IIdGenerator`1.CreateId">
+            <summary>
+            Creates a new Id.
+            </summary>
+            <returns>Returns an Id.</returns>
+        </member>
+        <member name="M:Benlai.Common.IdGen.IdGenerator.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Benlai.Common.IdGen.IdGenerator"/> class, 2016-01-01 0:00:00Z is used as default 
+            epoch and the <see cref="P:IdGen.MaskConfig.Default"/> value is used for the <see cref="P:Benlai.Common.IdGen.IdGenerator.MaskConfig"/>. The
+            <see cref="T:Benlai.Common.IdGen.DefaultTimeSource"/> is used to retrieve timestamp information.
+            </summary>
+            <param name="generatorId">The Id of the generator.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when GeneratorId exceeds maximum value.</exception>
+        </member>
+        <member name="M:Benlai.Common.IdGen.IdGenerator.#ctor(System.Int32,System.DateTime)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Benlai.Common.IdGen.IdGenerator"/> class. The <see cref="P:IdGen.MaskConfig.Default"/> 
+            value is used for the <see cref="P:Benlai.Common.IdGen.IdGenerator.MaskConfig"/>.  The <see cref="T:Benlai.Common.IdGen.DefaultTimeSource"/> is used to retrieve
+            timestamp information.
+            </summary>
+            <param name="generatorId">The Id of the generator.</param>
+            <param name="epoch">The Epoch of the generator.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Thrown when GeneratorId exceeds maximum value or epoch in future.
+            </exception>
+        </member>
+        <member name="M:Benlai.Common.IdGen.IdGenerator.#ctor(System.Int32,System.DateTime,Benlai.Common.IdGen.MaskConfig)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Benlai.Common.IdGen.IdGenerator"/> class.  The <see cref="T:Benlai.Common.IdGen.DefaultTimeSource"/> is
+            used to retrieve timestamp information.
+            </summary>
+            <param name="generatorId">The Id of the generator.</param>
+            <param name="epoch">The Epoch of the generator.</param>
+            <param name="maskConfig">The <see cref="P:Benlai.Common.IdGen.IdGenerator.MaskConfig"/> of the generator.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when maskConfig is null.</exception>
+            <exception cref="T:System.InvalidOperationException">Thrown when maskConfig defines a non-63 bit bitmask.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Thrown when GeneratorId or Sequence masks are &gt;31 bit, GeneratorId exceeds maximum value or epoch in future.
+            </exception>
+        </member>
+        <member name="M:Benlai.Common.IdGen.IdGenerator.#ctor(System.Int32,System.DateTime,Benlai.Common.IdGen.MaskConfig,Benlai.Common.IdGen.ITimeSource)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Benlai.Common.IdGen.IdGenerator"/> class.
+            </summary>
+            <param name="generatorId">The Id of the generator.</param>
+            <param name="epoch">The Epoch of the generator.</param>
+            <param name="maskConfig">The <see cref="P:Benlai.Common.IdGen.IdGenerator.MaskConfig"/> of the generator.</param>
+            <param name="timeSource">The time-source to use when acquiring time data.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when either maskConfig or timeSource is null.</exception>
+            <exception cref="T:System.InvalidOperationException">Thrown when maskConfig defines a non-63 bit bitmask.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            Thrown when GeneratorId or Sequence masks are &gt;31 bit, GeneratorId exceeds maximum value or epoch in future.
+            </exception>
+        </member>
+        <member name="M:Benlai.Common.IdGen.IdGenerator.CreateId">
+            <summary>
+            Creates a new Id.
+            </summary>
+            <returns>Returns an Id based on the <see cref="T:Benlai.Common.IdGen.IdGenerator"/>'s epoch, generatorid and sequence.</returns>
+            <exception cref="T:Benlai.Common.IdGen.InvalidSystemClockException">Thrown when clock going backwards is detected.</exception>
+            <exception cref="T:Benlai.Common.IdGen.SequenceOverflowException">Thrown when sequence overflows.</exception>
+        </member>
+        <member name="M:Benlai.Common.IdGen.IdGenerator.CreateMachineSpecificGenerator">
+            <summary>
+            Returns a new instance of an <see cref="T:Benlai.Common.IdGen.IdGenerator"/> based on the machine-name.
+            </summary>
+            <returns>A new instance of an <see cref="T:Benlai.Common.IdGen.IdGenerator"/> based on the machine-name.</returns>
+            <remarks>
+            Note: be very careful using this method; it is recommended to explicitly set an generatorId instead since
+            a hash of the machinename could result in a collision (especially when the bitmask for the generator is
+            very small) of the generator-id's across machines. Only use this in small setups (few hosts) and if you have
+            no other choice. Prefer to specify generator id's via configuration file or other means instead.
+            </remarks>
+        </member>
+        <member name="M:Benlai.Common.IdGen.IdGenerator.CreateMachineSpecificGenerator(System.DateTime)">
+            <summary>
+            Returns a new instance of an <see cref="T:Benlai.Common.IdGen.IdGenerator"/> based on the machine-name.
+            </summary>
+            <param name="epoch">The Epoch of the generator.</param>
+            <returns>A new instance of an <see cref="T:Benlai.Common.IdGen.IdGenerator"/> based on the machine-name.</returns>
+            <remarks>
+            Note: be very careful using this method; it is recommended to explicitly set an generatorId instead since
+            a hash of the machinename could result in a collision (especially when the bitmask for the generator is
+            very small) of the generator-id's across machines. Only use this in small setups (few hosts) and if you have
+            no other choice. Prefer to specify generator id's via configuration file or other means instead.
+            </remarks>
+        </member>
+        <member name="M:Benlai.Common.IdGen.IdGenerator.CreateMachineSpecificGenerator(System.DateTime,Benlai.Common.IdGen.MaskConfig)">
+            <summary>
+            Returns a new instance of an <see cref="T:Benlai.Common.IdGen.IdGenerator"/> based on the machine-name.
+            </summary>
+            <param name="epoch">The Epoch of the generator.</param>
+            <param name="maskConfig">The <see cref="P:Benlai.Common.IdGen.IdGenerator.MaskConfig"/> of the generator.</param>
+            <returns>A new instance of an <see cref="T:Benlai.Common.IdGen.IdGenerator"/> based on the machine-name.</returns>
+            <remarks>
+            Note: be very careful using this method; it is recommended to explicitly set an generatorId instead since
+            a hash of the machinename could result in a collision (especially when the bitmask for the generator is
+            very small) of the generator-id's across machines. Only use this in small setups (few hosts) and if you have
+            no other choice. Prefer to specify generator id's via configuration file or other means instead.
+            </remarks>
+        </member>
+        <member name="M:Benlai.Common.IdGen.IdGenerator.CreateMachineSpecificGenerator(System.DateTime,Benlai.Common.IdGen.MaskConfig,Benlai.Common.IdGen.ITimeSource)">
+            <summary>
+            Returns a new instance of an <see cref="T:Benlai.Common.IdGen.IdGenerator"/> based on the machine-name.
+            </summary>
+            <param name="epoch">The Epoch of the generator.</param>
+            <param name="maskConfig">The <see cref="P:Benlai.Common.IdGen.IdGenerator.MaskConfig"/> of the generator.</param>
+            <param name="timeSource">The time-source to use when acquiring time data.</param>
+            <returns>A new instance of an <see cref="T:Benlai.Common.IdGen.IdGenerator"/> based on the machine-name.</returns>
+            <remarks>
+            Note: be very careful using this method; it is recommended to explicitly set an generatorId instead since
+            a hash of the machinename could result in a collision (especially when the bitmask for the generator is
+            very small) of the generator-id's across machines. Only use this in small setups (few hosts) and if you have
+            no other choice. Prefer to specify generator id's via configuration file or other means instead.
+            </remarks>
+        </member>
+        <member name="M:Benlai.Common.IdGen.IdGenerator.CreateThreadSpecificGenerator">
+            <summary>
+            Returns a new instance of an <see cref="T:Benlai.Common.IdGen.IdGenerator"/> based on the (managed) thread this method is invoked on.
+            </summary>
+            <returns>A new instance of an <see cref="T:Benlai.Common.IdGen.IdGenerator"/> based on the (managed) thread this method is invoked on.</returns>
+            <remarks>
+            Note: This method can be used when using several threads on a single machine to get thread-specific generators;
+            if this method is used across machines there's a high probability of collisions in generator-id's. In that
+            case prefer to explicitly set the generator id's via configuration file or other means instead.
+            </remarks>
+        </member>
+        <member name="M:Benlai.Common.IdGen.IdGenerator.CreateThreadSpecificGenerator(System.DateTime)">
+            <summary>
+            Returns a new instance of an <see cref="T:Benlai.Common.IdGen.IdGenerator"/> based on the (managed) thread this method is invoked on.
+            </summary>
+            <param name="epoch">The Epoch of the generator.</param>
+            <returns>A new instance of an <see cref="T:Benlai.Common.IdGen.IdGenerator"/> based on the (managed) thread this method is invoked on.</returns>
+            <remarks>
+            Note: This method can be used when using several threads on a single machine to get thread-specific generators;
+            if this method is used across machines there's a high probability of collisions in generator-id's. In that
+            case prefer to explicitly set the generator id's via configuration file or other means instead.
+            </remarks>
+        </member>
+        <member name="M:Benlai.Common.IdGen.IdGenerator.CreateThreadSpecificGenerator(System.DateTime,Benlai.Common.IdGen.MaskConfig)">
+            <summary>
+            Returns a new instance of an <see cref="T:Benlai.Common.IdGen.IdGenerator"/> based on the (managed) thread this method is invoked on.
+            </summary>
+            <param name="epoch">The Epoch of the generator.</param>
+            <param name="maskConfig">The <see cref="P:Benlai.Common.IdGen.IdGenerator.MaskConfig"/> of the generator.</param>
+            <returns>A new instance of an <see cref="T:Benlai.Common.IdGen.IdGenerator"/> based on the (managed) thread this method is invoked on.</returns>
+            <remarks>
+            Note: This method can be used when using several threads on a single machine to get thread-specific generators;
+            if this method is used across machines there's a high probability of collisions in generator-id's. In that
+            case prefer to explicitly set the generator id's via configuration file or other means instead.
+            </remarks>
+        </member>
+        <member name="M:Benlai.Common.IdGen.IdGenerator.CreateThreadSpecificGenerator(System.DateTime,Benlai.Common.IdGen.MaskConfig,Benlai.Common.IdGen.ITimeSource)">
+            <summary>
+            Returns a new instance of an <see cref="T:Benlai.Common.IdGen.IdGenerator"/> based on the (managed) thread this method is invoked on.
+            </summary>
+            <param name="epoch">The Epoch of the generator.</param>
+            <param name="maskConfig">The <see cref="P:Benlai.Common.IdGen.IdGenerator.MaskConfig"/> of the generator.</param>
+            <param name="timeSource">The time-source to use when acquiring time data.</param>
+            <returns>A new instance of an <see cref="T:Benlai.Common.IdGen.IdGenerator"/> based on the (managed) thread this method is invoked on.</returns>
+            <remarks>
+            Note: This method can be used when using several threads on a single machine to get thread-specific generators;
+            if this method is used across machines there's a high probability of collisions in generator-id's. In that
+            case prefer to explicitly set the generator id's via configuration file or other means instead.
+            </remarks>
+        </member>
+        <member name="M:Benlai.Common.IdGen.IdGenerator.GetThreadId">
+            <summary>
+            Gets a unique identifier for the current managed thread.
+            </summary>
+            <returns>An integer that represents a unique identifier for this managed thread.</returns>
+        </member>
+        <member name="M:Benlai.Common.IdGen.IdGenerator.GetMachineHash">
+            <summary>
+            Gets a hashcode based on the <see cref="P:System.Environment.MachineName"/>.
+            </summary>
+            <returns>Returns a hashcode based on the <see cref="P:System.Environment.MachineName"/>.</returns>
+        </member>
+        <member name="M:Benlai.Common.IdGen.IdGenerator.GetTimestamp">
+            <summary>
+            Gets the number of milliseconds since the <see cref="T:Benlai.Common.IdGen.IdGenerator"/>'s epoch.
+            </summary>
+            <returns>Returns the number of milliseconds since the <see cref="T:Benlai.Common.IdGen.IdGenerator"/>'s epoch.</returns>
+        </member>
+        <member name="M:Benlai.Common.IdGen.IdGenerator.GetMask(System.Byte)">
+            <summary>
+            Returns a bitmask masking out the desired number of bits; a bitmask of 2 returns 000...000011, a bitmask of
+            5 returns 000...011111.
+            </summary>
+            <param name="bits">The number of bits to mask.</param>
+            <returns>Returns the desired bitmask.</returns>
+        </member>
+        <member name="M:Benlai.Common.IdGen.IdGenerator.IdStream">
+            <summary>
+            Returns a 'never ending' stream of Id's.
+            </summary>
+            <returns>A 'never ending' stream of Id's.</returns>
+        </member>
+        <member name="M:Benlai.Common.IdGen.IdGenerator.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates over Id's.
+            </summary>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerator`1"/> object that can be used to iterate over Id's.</returns>
+        </member>
+        <member name="M:Benlai.Common.IdGen.IdGenerator.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates over Id's.
+            </summary>
+            <returns>An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate over Id's.</returns>
+        </member>
+        <member name="P:Benlai.Common.IdGen.IdGenerator.Id">
+            <summary>
+            Gets the Id of the generator.
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.IdGen.IdGenerator.Epoch">
+            <summary>
+            Gets the epoch for the <see cref="T:Benlai.Common.IdGen.IdGenerator"/>.
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.IdGen.IdGenerator.MaskConfig">
+            <summary>
+            Gets the <see cref="P:Benlai.Common.IdGen.IdGenerator.MaskConfig"/> for the <see cref="T:Benlai.Common.IdGen.IdGenerator"/>.
+            </summary>
+        </member>
+        <member name="T:Benlai.Common.IdGen.InvalidSystemClockException">
+            <summary>
+            The exception that is thrown when a clock going backwards is detected.
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.IdGen.InvalidSystemClockException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Benlai.Common.IdGen.InvalidSystemClockException"/> class with a message that describes the error.
+            </summary>
+            <param name="message">
+            The message that describes the exception. The caller of this constructor is required to ensure that this 
+            string has been localized for the current system culture.
+            </param>
+        </member>
+        <member name="T:Benlai.Common.IdGen.MaskConfig">
+            <summary>
+            Specifies the number of bits to use for the different parts of an Id for an <see cref="T:Benlai.Common.IdGen.IdGenerator"/>.
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.IdGen.MaskConfig.#ctor(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Initializes a bitmask configuration for <see cref="T:Benlai.Common.IdGen.IdGenerator"/>s.
+            </summary>
+            <param name="timestampBits">Number of bits to use for the timestamp-part of Id's.</param>
+            <param name="generatorIdBits">Number of bits to use for the generator-id of Id's.</param>
+            <param name="sequenceBits">Number of bits to use for the sequence-part of Id's.</param>
+        </member>
+        <member name="M:Benlai.Common.IdGen.MaskConfig.WraparoundDate(System.DateTime)">
+            <summary>
+            Calculates the last date for an Id before a 'wrap around' will occur in the timestamp-part of an Id for the
+            given <see cref="T:Benlai.Common.IdGen.MaskConfig"/>.
+            </summary>
+            <param name="epoch">The used epoch for the <see cref="T:Benlai.Common.IdGen.IdGenerator"/> to use as offset.</param>
+            <returns>The last date for an Id before a 'wrap around' will occur in the timestamp-part of an Id.</returns>
+        </member>
+        <member name="M:Benlai.Common.IdGen.MaskConfig.WraparoundInterval">
+            <summary>
+            Calculates the interval at wich a 'wrap around' will occur in the timestamp-part of an Id for the given
+            <see cref="T:Benlai.Common.IdGen.MaskConfig"/>.
+            </summary>
+            <returns>
+            The interval at wich a 'wrap around' will occur in the timestamp-part of an Id for the given
+            <see cref="T:Benlai.Common.IdGen.MaskConfig"/>.
+            </returns>
+        </member>
+        <member name="P:Benlai.Common.IdGen.MaskConfig.TimestampBits">
+            <summary>
+            Gets number of bits to use for the timestamp part of the Id's to generate.
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.IdGen.MaskConfig.GeneratorIdBits">
+            <summary>
+            Gets number of bits to use for the generator-id part of the Id's to generate.
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.IdGen.MaskConfig.SequenceBits">
+            <summary>
+            Gets number of bits to use for the sequence part of the Id's to generate.
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.IdGen.MaskConfig.TotalBits">
+            <summary>
+            Gets the total number of bits for the <see cref="T:Benlai.Common.IdGen.MaskConfig"/>.
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.IdGen.MaskConfig.MaxIntervals">
+            <summary>
+            Returns the maximum number of intervals for this mask configuration.
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.IdGen.MaskConfig.MaxGenerators">
+            <summary>
+            Returns the maximum number of generators available for this mask configuration.
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.IdGen.MaskConfig.MaxSequenceIds">
+            <summary>
+            Returns the maximum number of sequential Id's for a time-interval (e.g. max. number of Id's generated 
+            within a single interval).
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.IdGen.MaskConfig.Default">
+            <summary>
+            Gets a default <see cref="T:Benlai.Common.IdGen.MaskConfig"/> with 41 bits for the timestamp part, 10 bits for the generator-id 
+            part and 12 bits for the sequence part of the id.
+            </summary>
+        </member>
+        <member name="T:Benlai.Common.IdGen.SequenceOverflowException">
+            <summary>
+            The exception that is thrown when a sequence overflows (e.g. too many Id's generated within the same timespan (ms)).
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.IdGen.SequenceOverflowException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Benlai.Common.IdGen.SequenceOverflowException"/> class with a message that describes the error.
+            </summary>
+            <param name="message">
+            The message that describes the exception. The caller of this constructor is required to ensure that this 
+            string has been localized for the current system culture.
+            </param>
+        </member>
+        <member name="M:Benlai.Common.IM.MsmqHelper`1.ReceiveMsgQueue(System.TimeSpan)">
+            <summary>
+            接收最新的一条消息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Benlai.Common.ResultEnum">
+            <summary>
+            结果类别
+            </summary>
+        </member>
+        <member name="T:Benlai.Common.OperationResult">
+            <summary>
+            操作结果
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.OperationResult.#ctor">
+            <summary>
+            操作结果构造函数
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.OperationResult.#ctor(Benlai.Common.ResultEnum,System.String)">
+            <summary>
+            操作结果构造函数
+            </summary>
+            <param name="result">结果类别</param>
+            <param name="resultMessage">结果信息说明</param>
+        </member>
+        <member name="M:Benlai.Common.OperationResult.#ctor(Benlai.Common.ResultEnum,System.Int32)">
+            <summary>
+            操作结果构造函数
+            </summary>
+            <param name="result">结果类别</param>
+            <param name="resultMessage">结果信息说明</param>
+        </member>
+        <member name="M:Benlai.Common.OperationResult.Error(System.Exception)">
+            <summary>
+            返回结果"错误"类型的操作结果对象
+            </summary>
+            <param name="exp">异常对象</param>
+            <returns>"错误"类型的操作结果对象</returns>
+        </member>
+        <member name="M:Benlai.Common.OperationResult.Error(System.String)">
+            <summary>
+            返回结果"错误"类型的操作结果对象
+            </summary>
+            <param name="resultMessage">结果信息说明</param>
+            <returns>"错误"类型的操作结果对象</returns>
+        </member>
+        <member name="M:Benlai.Common.OperationResult.Information(System.String)">
+            <summary>
+            返回结果"正确"类型的操作结果对象
+            </summary>
+            <param name="resultMessage">结果信息说明</param>
+            <returns>结果"正确"类型的操作结果对象</returns>
+        </member>
+        <member name="M:Benlai.Common.OperationResult.Unsecurity(System.String)">
+            <summary>
+            返回结果"非安全"类型的操作结果对象
+            </summary>
+            <param name="resultMessage">结果信息说明</param>
+            <returns>结果"非安全"类型的操作结果对象</returns>
+        </member>
+        <member name="M:Benlai.Common.OperationResult.Warning(System.String)">
+            <summary>
+            返回结果"警告"类型的操作结果对象
+            </summary>
+            <param name="resultMessage">结果信息说明</param>
+            <returns>结果"警告"类型的操作结果对象</returns>
+        </member>
+        <member name="P:Benlai.Common.OperationResult.CustomeCode">
+            <summary>
+            获取/设置 结果编码
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.OperationResult.IsError">
+            <summary>
+            获取结果是否错误
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.OperationResult.Message">
+            <summary>
+            获取/设置 结果信息说明
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.OperationResult.Result">
+            <summary>
+            获取/设置 结果类别
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.OperationResult.OK">
+            <summary>
+            获取结果"正确"类型的操作结果对象(静态)
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.OperationResult.Unknow">
+            <summary>
+            获取未知的操作结果对象（静态）
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.DateTimeHelper.ConvertJsonDateToDateString(System.Text.RegularExpressions.Match)">
+            <summary>    
+            将Json序列化的时间由/Date(1294499956278+0800)转为字符串    
+            </summary>    
+        </member>
+        <member name="M:Benlai.Common.DateTimeHelper.ConvertDateStringToJsonDate(System.Text.RegularExpressions.Match)">
+            <summary>    
+            将时间字符串转为Json时间    
+            </summary>    
+        </member>
+        <member name="M:Benlai.Common.DateTimeHelper.EarlierFirstDate(System.DateTime,System.DateTime,Benlai.Common.DateTimeCompareType)">
+            <summary>
+            比较两个日期，第一个大返回True
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.DateTimeHelper.LateerFirstDate(System.DateTime,System.DateTime,Benlai.Common.DateTimeCompareType)">
+            <summary>
+            比较两个日期，第一个小返回True
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.DateTimeHelper.FormatDateMinutes(System.DateTime)">
+            <summary> 
+            分钟数取整 :00 or :30
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.DateTimeHelper.FormatDateMinutes(System.Int32@,System.Int32@)">
+            <summary> 
+            分钟数取整 :00 or :30 or Hour+1
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.DateTimeHelper.DateDiff(System.DateTime,System.DateTime)">
+            <summary>
+            计算时间差
+            </summary>
+            <param name="first"></param>
+            <param name="second"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.DateTimeHelper.WeekOfYear(System.DateTime)">
+            <summary>
+            日期为年度第几周
+            </summary>
+            <param name="dt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.DateTimeHelper.FirstDayOfPreviousMonth(System.DateTime)">
+            <summary>
+            取得上个月第一天
+            </summary>
+            <param name="now">要取得上个月第一天的当前时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.DateTimeHelper.LastDayOfPreviousMonth(System.DateTime)">
+            <summary>
+            取得上个月的最后一天
+            </summary>
+            <param name="now">要取得上个月最后一天的当前时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.DateTimeHelper.FirstDayOfCurrentMonth(System.DateTime)">
+            <summary>
+            当月第一天
+            </summary>
+            <param name="now"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.DateTimeHelper.LastDayOfCurrentMonth(System.DateTime)">
+            <summary>
+            当月最后一天
+            </summary>
+            <param name="now"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.DateTimeHelper.FirstDayOfPreviousWeek(System.DateTime)">
+            <summary>
+            上周一
+            </summary>
+            <param name="now"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.DateTimeHelper.LastDayOfPreviousWeek(System.DateTime)">
+            <summary>
+            上周日
+            </summary>
+            <param name="now"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.DateTimeHelper.GetNextTime(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            获取下一个时分秒的时间
+            </summary>
+            <param name="hours"></param>
+            <param name="minutes"></param>
+            <param name="seconds"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Benlai.Common.DateTimeCompareType.All">
+            <summary>
+            全部比较
+            </summary>
+        </member>
+        <member name="F:Benlai.Common.DateTimeCompareType.YYMMDD">
+            <summary>
+            年月日
+            </summary>
+        </member>
+        <member name="F:Benlai.Common.DateTimeCompareType.HHMMSS">
+            <summary>
+            时分秒
+            </summary>
+        </member>
+        <member name="F:Benlai.Common.DateTimeCompareType.DDHHMM">
+            <summary>
+            日时分
+            </summary>
+        </member>
+        <member name="F:Benlai.Common.FtpAccess.ftpUser">
+            <summary> 
+            ftp用户名，匿名为“” 
+            </summary> 
+        </member>
+        <member name="F:Benlai.Common.FtpAccess.ftpPassWord">
+            <summary> 
+            ftp用户密码，匿名为“” 
+            </summary> 
+        </member>
+        <member name="M:Benlai.Common.FtpAccess.#ctor(System.String,System.String)">
+             <summary> 
+            通过用户名，密码连接到FTP服务器 
+             </summary> 
+             <param name="ftpUser">ftp用户名，匿名为“”</param> 
+             <param name="ftpPassWord">ftp登陆密码，匿名为“”</param> 
+        </member>
+        <member name="M:Benlai.Common.FtpAccess.DeleteAllFile(System.String)">
+            <summary>
+            删除FTP服务器文件夹（包括文件）
+            </summary>
+            <param name="ftpPath"></param>
+        </member>
+        <member name="M:Benlai.Common.FtpAccess.DeleteFile(System.String)">
+            <summary>
+            删除文件
+            </summary>
+            <param name="currenFilePath"></param>
+        </member>
+        <member name="M:Benlai.Common.FtpAccess.DeleteDirectory(System.String)">
+            <summary>
+            删除文件夹
+            </summary>
+            <param name="currentDirectoryPath"></param>
+        </member>
+        <member name="M:Benlai.Common.FtpAccess.UploadFile(System.String,System.String)">
+            <summary> 
+            上传文件到Ftp服务器 
+            </summary> 
+            <param name="uri">把上传的文件保存为ftp服务器文件的uri,如"ftp://192.168.1.104/capture-212.avi"</param> 
+            <param name="upLoadFile">要上传的本地的文件路径，如D:\capture-2.avi</param> 
+        </member>
+        <member name="M:Benlai.Common.FtpAccess.UploadDirectory(System.String,System.String)">
+            <summary>
+            上传整个文件夹
+            </summary>
+            <param name="ftpUri">上传到FTP的路径</param>
+            <param name="uploadFile">要上传的本地文件夹目录</param>
+        </member>
+        <member name="M:Benlai.Common.FtpAccess.GetDirDetails(System.String)">
+            <summary>
+            获取目录下的详细信息
+            </summary>
+            <param name="localDir">本机目录</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.FtpAccess.MakeDir(System.String,System.String)">
+            <summary>
+            新建目录
+            </summary>
+            <param name="ftpPath">FTP目录路径 例如：ftp://222.76.208.41/xmjsapproval</param>
+            <param name="dirName">需创建的文件夹名称</param>
+        </member>
+        <member name="M:Benlai.Common.FtpAccess.DownloadFile(System.String,System.String)">
+            <summary> 
+            从ftp下载文件到本地服务器 
+            </summary> 
+            <param name="downloadUrl">要下载的ftp文件路径，如ftp://192.168.1.104/capture-2.avi</param> 
+            <param name="saveFileUrl">本地保存文件的路径，如(@"d:\capture-22.avi"</param> 
+        </member>
+        <member name="M:Benlai.Common.FtpAccess.BreakPointDownloadFile(System.String,System.String)">
+            <summary> 
+            从FTP下载文件到本地服务器,支持断点下载 
+            </summary> 
+            <param name="ftpUri">ftp文件路径，如"ftp://localhost/test.txt"</param> 
+            <param name="saveFile">保存文件的路径，如C:\\test.txt</param> 
+        </member>
+        <member name="M:Benlai.Common.FtpAccess.CheckDirectoryExist(System.String,System.String)">
+            <summary>
+            检查目录是否存在
+            </summary>
+            <param name="ftpPath">要检查的目录的上一级目录</param>
+            <param name="dirName">要检查的目录名</param>
+            <returns>存在返回true，否则false</returns>
+        </member>
+        <member name="M:Benlai.Common.FtpAccess.ListFilesAndDirectories(System.String)">
+            <summary> 
+            列出FTP服务器上面当前目录的所有文件和目录 
+            </summary> 
+            <param name="ftpUri">FTP目录</param> 
+            <returns></returns> 
+        </member>
+        <member name="M:Benlai.Common.FtpAccess.ListFiles(System.String)">
+            <summary> 
+            列出FTP目录下的所有文件 
+            </summary> 
+            <param name="ftpUri">FTP目录</param> 
+            <returns></returns> 
+        </member>
+        <member name="M:Benlai.Common.FtpAccess.ListDirectories(System.String)">
+            <summary> 
+            列出FTP目录下的所有目录 
+            </summary> 
+            <param name="ftpUri">FRTP目录</param> 
+            <returns>目录列表</returns> 
+        </member>
+        <member name="M:Benlai.Common.FtpAccess.GetList(System.String)">
+            <summary> 
+            获得文件和目录列表 
+            </summary> 
+            <param name="datastring">FTP返回的列表字符信息</param> 
+        </member>
+        <member name="M:Benlai.Common.FtpAccess.ParseFileStructFromUnixStyleRecord(System.String)">
+            <summary> 
+            从Unix@ 
+            </summary> 
+            <param name="Record">文件信息</param> 
+        </member>
+        <member name="M:Benlai.Common.FtpAccess.ParseFileStructFromWindowsStyleRecord(System.String)">
+            <summary> 
+            从Windows格式中返回文件信息 
+            </summary> 
+            <param name="Record">文件信息</param> 
+        </member>
+        <member name="M:Benlai.Common.FtpAccess._cutSubstringFromStringWithTrim(System.String@,System.Char,System.Int32)">
+            <summary> 
+            按照一定的规则进行字符串截取 
+            </summary> 
+            <param name="s">截取的字符串</param> 
+            <param name="c">查找的字符</param> 
+            <param name="startIndex">查找的位置</param> 
+        </member>
+        <member name="M:Benlai.Common.FtpAccess.GuessFileListStyle(System.String[])">
+            <summary> 
+            判断文件列表的方式Window方式还是Unix方式 
+            </summary> 
+            <param name="recordList">文件信息列表</param> 
+        </member>
+        <member name="M:Benlai.Common.FtpAccess.DownFtpDir(System.String,System.String)">
+            <summary>   
+            从FTP下载整个文件夹   
+            </summary>   
+            <param name="ftpDir">FTP文件夹路径</param>   
+            <param name="saveDir">保存的本地文件夹路径</param>   
+        </member>
+        <member name="M:Benlai.Common.GZipHelper.GetDatasetByString(System.String)">
+            <summary>  
+            解压  
+            </summary>  
+            <param name="Value"></param>  
+            <returns></returns>  
+        </member>
+        <member name="M:Benlai.Common.GZipHelper.GetStringByDataset(System.String)">
+            <summary>  
+            根据DATASET压缩字符串  
+            </summary>  
+            <param name="ds"></param>  
+            <returns></returns>  
+        </member>
+        <member name="M:Benlai.Common.GZipHelper.GZipCompressString(System.String)">
+            <summary>  
+            将传入字符串以GZip算法压缩后，返回Base64编码字符  
+            </summary>  
+            <param name="rawString">需要压缩的字符串</param>  
+            <returns>压缩后的Base64编码的字符串</returns>  
+        </member>
+        <member name="M:Benlai.Common.GZipHelper.Compress(System.Byte[])">
+            <summary>  
+            GZip压缩  
+            </summary>  
+            <param name="rawData"></param>  
+            <returns></returns>  
+        </member>
+        <member name="M:Benlai.Common.GZipHelper.GZipDecompressString(System.String)">
+            <summary>  
+            将传入的二进制字符串资料以GZip算法解压缩  
+            </summary>  
+            <param name="zippedString">经GZip压缩后的二进制字符串</param>  
+            <returns>原始未压缩字符串</returns>  
+        </member>
+        <member name="M:Benlai.Common.GZipHelper.Decompress(System.Byte[])">
+            <summary>  
+            ZIP解压  
+            </summary>  
+            <param name="zippedData"></param>  
+            <returns></returns>  
+        </member>
+        <member name="P:Benlai.Common.ReportServiceUtils.SendReportQueuePaths">
+            <summary>
+            发送报表请求队列的路径列表
+            </summary>
+        </member>
+        <member name="T:Benlai.Common.DynamicDataType">
+            <summary>
+            动态数据类型
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.DynamicDataType.CreateInstance">
+            <summary>
+            使用指定类型的默认构造函数来创建该类型的实例
+            </summary>
+            <returns>创建类型的对象</returns>
+        </member>
+        <member name="M:Benlai.Common.DynamicDataType.CreateInstance(System.String,System.String)">
+            <summary>
+            使用指定类型的默认构造函数来创建该类型的实例(静态)
+            </summary>
+            <param name="dllFilename">程序集文件路径</param>
+            <param name="dataType">数据类型</param>
+            <returns>创建类型的对象</returns>
+        </member>
+        <member name="M:Benlai.Common.DynamicDataType.GetDataTypes">
+            <summary>
+            获取此程序集中定义的类型
+            </summary>
+            <returns>类型集合</returns>
+        </member>
+        <member name="M:Benlai.Common.DynamicDataType.GetDataTypes(System.String)">
+            <summary>
+            获取此程序集中定义的类型(静态)
+            </summary>
+            <param name="dllFilename">程序集文件路径</param>
+            <returns>类型集合</returns>
+        </member>
+        <member name="P:Benlai.Common.DynamicDataType.DataType">
+            <summary>
+            获取/设置 数据类型
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.DynamicDataType.DllFilePath">
+            <summary>
+            获取/设置 程序集文件路径
+            </summary>
+        </member>
+        <member name="T:Benlai.Common.HtmlExtract">
+            <summary>
+            Html提取
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.HtmlExtract.ExtractText(System.String)">
+            <summary>
+            从Html格式字符串中提取纯文本
+            </summary>
+            <param name="htmlString">html格式字符串</param>
+            <returns>纯文本</returns>
+        </member>
+        <member name="M:Benlai.Common.IM.Message.Send">
+            <summary>
+            send the message
+            </summary>
+            <returns>wheath successful</returns>
+        </member>
+        <member name="M:Benlai.Common.IM.Message.#ctor">
+            <summary>
+            create a empty mail message object
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.IM.Message.ID">
+            <summary>
+            get/set the identity value of the message in the database
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.IM.Message.CreationTime">
+            <summary>
+            get the creation time of the message
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.IM.Message.SentTime">
+            <summary>
+            get the sent time of the message
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.IM.Message.Status">
+            <summary>
+            get the status of the message
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.IM.MailMessage.#ctor">
+            <summary>
+            create a empty mail message object
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.IM.MailMessage.Send">
+            <summary>
+            send the mail message
+            </summary>
+            <returns>wheath successful</returns>
+        </member>
+        <member name="P:Benlai.Common.IM.MailMessage.To">
+            <summary>
+            get/set the To part of the mail
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.IM.MailMessage.Cc">
+            <summary>
+            get/set the Cc part of the mail
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.IM.MailMessage.Subject">
+            <summary>
+            set/get the parameter of the mail subject
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.IM.MailMessage.Body">
+            <summary>
+            set/get the parameter of the mail body
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.IM.MailMessage.Attachs">
+            <summary>
+            附件
+            </summary>
+        </member>
+        <member name="F:Benlai.Common.IM.MessageStatus.Unsend">
+            <summary>
+            not send the mail
+            </summary>
+        </member>
+        <member name="F:Benlai.Common.IM.MessageStatus.Sent">
+            <summary>
+            sent the mail yet
+            </summary>
+        </member>
+        <member name="F:Benlai.Common.IM.MessageStatus.Bad">
+            <summary>
+            bad mail
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.IM.MessageQueueOperation.GetUnReadMessageCount(System.String,System.String)">
+            <summary>
+            获取未读消息数量
+            </summary>
+            <param name="messageQueuePath"></param>
+            <param name="messageLabel"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Benlai.Common.IM.MessageQueueOperation.SendMessage``1(System.String,System.String,``0,System.Boolean)" -->
+        <member name="M:Benlai.Common.IM.MessageQueueOperation.ReceviceMessage``1(System.String,System.String,System.Func{``0,System.Boolean},System.Boolean,System.Boolean)">
+            <summary>
+            接收消息队列并处理
+            </summary>
+            <typeparam name="T">接收的消息主体对象类型</typeparam>
+            <param name="messageQueuePath">消息队列路径</param>
+            <param name="messageLabel">消息标识</param>
+            <param name="fun">处理消息的事件代理</param>
+            <param name="isTransactionMessage">是否处理的是事务性消息</param>
+            <param name="isOpenThread">是否另开启线程去处理消息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.ILogWriter.WriteLog(Benlai.Common.LogTypeEnum,System.String,System.String,System.String)">
+            <summary>
+            添加日志信息
+            </summary>
+            <param name="logType">日志类型</param>
+            <param name="username">用户名</param>
+            <param name="source">日志源</param>
+            <param name="content">日志内容</param>
+        </member>
+        <member name="M:Benlai.Common.ILogWriter.QueryLog(System.DateTime,System.DateTime)">
+            <summary>
+            查询日志
+            </summary>
+            <param name="startTime">开始时间</param>
+            <param name="endTime">结束时间</param>
+            <returns></returns>
+        </member>
+        <member name="P:Benlai.Common.ILogWriter.ApplicationSchema">
+            <summary>
+            获取/设置日志所属的应用程序纲要
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.LogWriter.WriteLog(Benlai.Common.LogTypeEnum,System.String,System.String,System.String)">
+            <summary>
+            添加日志信息
+            </summary>
+            <param name="logType">日志类型</param>
+            <param name="username">用户名</param>
+            <param name="source">日志源</param>
+            <param name="content">日志内容</param>
+        </member>
+        <member name="M:Benlai.Common.LogWriter.WriteLog(Benlai.Common.LogTypeEnum,System.String,System.String)">
+            <summary>
+            添加日志信息
+            </summary>
+            <param name="logType">日志类型</param>
+            <param name="username">用户名</param>
+            <param name="content">日志内容</param>
+        </member>
+        <member name="M:Benlai.Common.LogWriter.WriteException(System.String,System.String,System.Exception)">
+            <summary>
+            添加错误异常日志
+            </summary>
+            <param name="username">用户名</param>
+            <param name="source">日志源</param>
+            <param name="exp">应用程序异常</param>
+        </member>
+        <member name="M:Benlai.Common.LogWriter.WriteException(System.String,System.Exception)">
+            <summary>
+            添加错误异常日志
+            </summary>
+            <param name="username">用户名</param>
+            <param name="exp">应用程序异常</param>
+        </member>
+        <member name="M:Benlai.Common.LogWriter.WriteInformation(System.String,System.String,System.String)">
+            <summary>
+            添加信息日志
+            </summary>
+            <param name="username">用户名</param>
+            <param name="source">日志源</param>
+            <param name="content">日志内容</param>
+        </member>
+        <member name="M:Benlai.Common.LogWriter.WriteInformation(System.String,System.String)">
+            <summary>
+            添加信息日志
+            </summary>
+            <param name="username">用户名</param>
+            <param name="content">日志内容</param>
+        </member>
+        <member name="M:Benlai.Common.LogWriter.WriteWarning(System.String,System.String,System.String)">
+            <summary>
+            添加警告日志
+            </summary>
+            <param name="username">用户名</param>
+            <param name="source">日志源</param>
+            <param name="content">日志内容</param>
+        </member>
+        <member name="M:Benlai.Common.LogWriter.WriteWarning(System.String,System.String)">
+            <summary>
+            添加警告日志
+            </summary>
+            <param name="username">用户名</param>
+            <param name="content">日志内容</param>
+        </member>
+        <member name="M:Benlai.Common.LogWriter.WriteError(System.String,System.String,System.String)">
+            <summary>
+            添加错误日志
+            </summary>
+            <param name="username">用户名</param>
+            <param name="source">日志源</param>
+            <param name="content">日志内容</param>
+        </member>
+        <member name="M:Benlai.Common.LogWriter.WriteError(System.String,System.String)">
+            <summary>
+            添加错误日志
+            </summary>
+            <param name="username">用户名</param>
+            <param name="content">日志内容</param>
+        </member>
+        <member name="P:Benlai.Common.LogWriter.ApplicationSchema">
+            <summary>
+            获取/设置日志所属的应用程序纲要
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.DbLogWriter.CreateConnection">
+            <summary>
+            创建数据库连接对象
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.DbLogWriter.CreateCommand">
+            <summary>
+            创建数据命令对象
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.DbLogWriter.CreateLogTable(System.String)">
+            <summary>
+            创建日志数据表
+            </summary>
+            <param name="LogTable">日志数据表名称</param>
+        </member>
+        <member name="M:Benlai.Common.DbLogWriter.ExistsLogTable(System.String)">
+            <summary>
+            检查日志数据表是否存在
+            </summary>
+            <param name="LogTable">日志数据表名称</param>
+            <returns>是否存在</returns>
+        </member>
+        <member name="M:Benlai.Common.DbLogWriter.WriteLog(Benlai.Common.LogTypeEnum,System.String,System.String,System.String)">
+            <summary>
+            添加日志信息
+            </summary>
+            <param name="logType">日志类型</param>
+            <param name="username">用户名</param>
+            <param name="source">日志源</param>
+            <param name="content">日志内容</param>
+        </member>
+        <member name="P:Benlai.Common.DbLogWriter.ConnectionString">
+            <summary>
+            获取/设置数据库连接字符串属性
+            </summary>
+        </member>
+        <member name="T:Benlai.Common.LogTypeEnum">
+            <summary>
+            日志信息类型
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.OSLogWriter.WriteLog(Benlai.Common.LogTypeEnum,System.String,System.String,System.String)">
+            <summary>
+            添加操作系统日志信息
+            </summary>
+            <param name="logType">日志类型</param>
+            <param name="username">用户名</param>
+            <param name="source">日志源</param>
+            <param name="content">日志内容</param>
+        </member>
+        <member name="M:Benlai.Common.XmlLogWriter.GetCurrentLogFilename">
+            <summary>
+            获取当前的日志文件名
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.XmlLogWriter.CheckLogFile(System.String)">
+            <summary>
+            检查日志文件，若不存在则创建相应的日志文件
+            </summary>
+            <param name="logFile">日志文件名</param>
+        </member>
+        <member name="M:Benlai.Common.XmlLogWriter.WriteLog(Benlai.Common.LogTypeEnum,System.String,System.String,System.String)">
+            <summary>
+            添加日志信息
+            </summary>
+            <param name="logType">日志类型</param>
+            <param name="username">用户名</param>
+            <param name="source">日志源</param>
+            <param name="content">日志内容</param>
+        </member>
+        <member name="P:Benlai.Common.XmlLogWriter.CurrentLogFilename">
+            <summary>
+            获取当前的日志文件
+            </summary>
+        </member>
+        <member name="T:Benlai.Common.FileOperation">
+            <summary>
+            文件操作对象
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.FileOperation.ReadFile(System.String)">
+            <summary>
+            读取指定文件的内容
+            </summary>
+            <param name="Filename">文件名</param>
+            <returns>文件内容</returns>
+        </member>
+        <member name="M:Benlai.Common.FileOperation.ReadFile(System.String,System.Text.Encoding)">
+            <summary>
+            读取指定文件的内容
+            </summary>
+            <param name="Filename">文件名</param>
+            <returns>文件内容</returns>
+        </member>
+        <member name="M:Benlai.Common.FileOperation.WriteFile(System.String,System.String,System.Boolean,System.Text.Encoding)">
+            <summary>
+            将内容写入指定的文件
+            </summary>
+            <param name="Filename">文件名</param>
+            <param name="Content">文件内容</param>
+            <param name="Append">是否追加</param>
+            <param name="Encoding">内容编码类型</param>
+        </member>
+        <member name="M:Benlai.Common.FileOperation.WriteFile(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            将内容写入指定的文件
+            </summary>
+            <param name="Filename">文件名</param>
+            <param name="Content">文件内容</param>
+            <param name="Encoding">内容编码类型</param>
+        </member>
+        <member name="M:Benlai.Common.FileOperation.WriteFile(System.String,System.String)">
+            <summary>
+            将内容写入指定的文件
+            </summary>
+            <param name="Filename">文件名</param>
+            <param name="Content">文件内容</param>
+        </member>
+        <member name="T:Benlai.Common.ObjectSerialize">
+            <summary>
+            对象序列化
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.ObjectSerialize.DeserializeFromeBytes(System.Byte[])">
+            <summary>
+            从字节数组反序列化对象
+            </summary>
+            <param name="bytes">字节数组</param>
+            <returns>对象</returns>
+        </member>
+        <member name="M:Benlai.Common.ObjectSerialize.DeserializeFromFile(System.String)">
+            <summary>
+            从文件内容反序列化对象
+            </summary>
+            <param name="path">文件路径</param>
+            <returns>对象</returns>
+        </member>
+        <member name="M:Benlai.Common.ObjectSerialize.DeserializeFromString(System.String)">
+            <summary>
+            从对象字符内容反序列化对象
+            </summary>
+            <param name="obj">对象字符串</param>
+            <returns>对象</returns>
+        </member>
+        <member name="M:Benlai.Common.ObjectSerialize.DeserializeFromString(System.String,System.Text.Encoding)">
+            <summary>
+            从对象字符内容反序列化对象
+            </summary>
+            <param name="obj">对象字符串</param>
+            <param name="encoding">字符编码</param>
+            <returns>对象</returns>
+        </member>
+        <member name="M:Benlai.Common.ObjectSerialize.SerializeToBytes(System.Object)">
+            <summary>
+            序列化对象至字节数组
+            </summary>
+            <param name="obj">对象</param>
+            <returns>字节数组</returns>
+        </member>
+        <member name="M:Benlai.Common.ObjectSerialize.SerializeToFile(System.Object,System.String)">
+            <summary>
+            序列化对象至文件
+            </summary>
+            <param name="obj">对象</param>
+            <param name="path">文件路径</param>
+        </member>
+        <member name="M:Benlai.Common.ObjectSerialize.SerializeToString(System.Object)">
+            <summary>
+            序列化对象至字符串
+            </summary>
+            <param name="obj">对象</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Benlai.Common.ObjectSerialize.SerializeToString(System.Object,System.Text.Encoding)">
+            <summary>
+            序列化对象至字符串
+            </summary>
+            <param name="obj">对象</param>
+            <param name="encoding">字符编码</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="T:Benlai.Common.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.Properties.Resources.LOG_EXP_FORMAT">
+             <summary>
+               Looks up a localized string similar to Message: {0}
+            Source: {1}
+            Inner Exception: {2}.
+             </summary>
+        </member>
+        <member name="T:Benlai.Common.RegistryRootEnum">
+            <summary>
+            注册表根节点
+            </summary>
+        </member>
+        <member name="T:Benlai.Common.RegAccess">
+            <summary>
+            注册表读写对象
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.RegAccess.GetRootKey(Benlai.Common.RegistryRootEnum)">
+            <summary>
+            获取注册表的根节点
+            </summary>
+            <param name="Root">根节点名称枚举</param>
+            <returns>注册表的根节点</returns>
+        </member>
+        <member name="M:Benlai.Common.RegAccess.GetRootKey(System.String)">
+            <summary>
+            获取注册表的根节点
+            </summary>
+            <param name="Root">根节点名称</param>
+            <returns>注册表的根节点</returns>
+        </member>
+        <member name="M:Benlai.Common.RegAccess.SetSetting(Benlai.Common.RegistryRootEnum,System.String,System.String,System.String)">
+            <summary>
+            设置注册表值
+            </summary>
+            <param name="Root">根注册表结点</param>
+            <param name="Path">注册表路径</param>
+            <param name="Key">注册表键名</param>
+            <param name="Value">键值</param>
+            <returns>成功与否</returns>
+        </member>
+        <member name="M:Benlai.Common.RegAccess.GetSetting(Benlai.Common.RegistryRootEnum,System.String,System.String,System.String@,System.String)">
+            <summary>
+            获取注册表值
+            </summary>
+            <param name="Root">根注册表结点</param>
+            <param name="Path">注册表路径</param>
+            <param name="Key">注册表键名</param>
+            <param name="Value">键值</param>
+            <param name="Default">默认值</param>
+            <returns>成功与否</returns>
+        </member>
+        <member name="M:Benlai.Common.RegAccess.GetSetting(Benlai.Common.RegistryRootEnum,System.String,System.String,System.String)">
+            <summary>
+            获取注册表值
+            </summary>
+            <param name="Root">根注册表结点</param>
+            <param name="Path">注册表路径</param>
+            <param name="Key">注册表键名</param>
+            <param name="Default">默认值</param>
+            <returns>键值</returns>
+        </member>
+        <member name="M:Benlai.Common.RegAccess.DeleteSetting(Benlai.Common.RegistryRootEnum,System.String,System.String)">
+            <summary>
+            删除注册表值
+            </summary>
+            <param name="Root">根注册表结点</param>
+            <param name="Path">注册表路径</param>
+            <param name="Key">注册表键名</param>
+            <returns>删除成功与否</returns>
+        </member>
+        <member name="M:Benlai.Common.RegAccess.GetSettingNames(Benlai.Common.RegistryRootEnum,System.String)">
+            <summary>
+             获取注册表值名称
+            </summary>
+            <param name="Root">根注册表结点</param>
+            <param name="Path">注册表路径</param>
+            <returns>注册表值名称</returns>
+        </member>
+        <member name="M:Benlai.Common.RegAccess.GetSettingCount(Benlai.Common.RegistryRootEnum,System.String)">
+            <summary>
+            获取注册表值数
+            </summary>
+            <param name="Root">根注册表结点</param>
+            <param name="Path">注册表路径</param>
+            <returns>注册表值数</returns>
+        </member>
+        <member name="M:Benlai.Common.RegAccess.SettingExists(Benlai.Common.RegistryRootEnum,System.String,System.String)">
+            <summary>
+            检查在注册表中是否存在该键名
+            </summary>
+            <param name="Root">根注册表结点</param>
+            <param name="Path">注册表路径</param>
+            <param name="Key">注册表键名</param>
+            <returns>该键名是否存在</returns>
+        </member>
+        <member name="M:Benlai.Common.RegAccess.FolderExists(Benlai.Common.RegistryRootEnum,System.String,System.String)">
+            <summary>
+            检查在注册表中是否存在该项
+            </summary>
+            <param name="Root">根注册表结点</param>
+            <param name="Path">注册表路径</param>
+            <param name="Folder">项名称</param>
+            <returns>该项是否存在</returns>
+        </member>
+        <member name="M:Benlai.Common.RegAccess.CreateRegFolder(Benlai.Common.RegistryRootEnum,System.String,System.String)">
+            <summary>
+            创建注册表中的项
+            </summary>
+            <param name="Root">根注册表结点</param>
+            <param name="Path">注册表路径</param>
+            <param name="Folder">项名称</param>
+            <returns>创建是否存在</returns>
+        </member>
+        <member name="M:Benlai.Common.RegAccess.DeleteRegFolder(Benlai.Common.RegistryRootEnum,System.String,System.String)">
+            <summary>
+            删除注册表中的项
+            </summary>
+            <param name="Root">根注册表结点</param>
+            <param name="Path">注册表路径</param>
+            <param name="Folder">项名称</param>
+            <returns>删除是否存在</returns>
+        </member>
+        <member name="M:Benlai.Common.RegAccess.GetRegFolderNames(Benlai.Common.RegistryRootEnum,System.String)">
+            <summary>
+             获取注册表项名称
+            </summary>
+            <param name="Root">根注册表结点</param>
+            <param name="Path">注册表路径</param>
+            <returns>注册表项名称</returns>
+        </member>
+        <member name="M:Benlai.Common.RegAccess.GetRegFolderCount(Benlai.Common.RegistryRootEnum,System.String)">
+            <summary>
+            获取子注册表项数
+            </summary>
+            <param name="Root">根注册表结点</param>
+            <param name="Path">注册表路径</param>
+            <returns>子注册表项数</returns>
+        </member>
+        <member name="F:Benlai.Common.Information.IntNull">
+            <summary>
+            IntNull=-999999
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.Information.EncodingJavascriptString(System.Object)">
+            <summary>
+            对字符串进行Javascript代码编译
+            </summary>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.EncodingSqlSearchKeyword(System.Object)">
+            <summary>
+            对字符串进行SQL 搜索关键字编码
+            </summary>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.EncodingSqlString(System.Object)">
+            <summary>
+            对字符串进行SQL 语句编码
+            </summary>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.EncodingMD5(System.Object)">
+            <summary>
+            对字符进行MD5编码
+            </summary>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.EncodingMD5(System.Object,System.Text.Encoding)">
+            <summary>
+            对字符进行MD5编码
+            </summary>
+            <param name="content"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.VaildFileName(System.String)">
+            <summary>
+            验证文件名或目录名是否合法
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.IsDate(System.String)">
+            <summary>
+            是否为日期时间
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.IsNumeric(System.String)">
+            <summary>
+            是否为数字
+            </summary>
+            <param name="value">值</param>
+            <returns>是否为数字</returns>
+        </member>
+        <member name="M:Benlai.Common.Information.IsInt(System.String)">
+            <summary>
+            是否为整数
+            </summary>
+            <param name="value">值</param>
+            <returns>是否为整数</returns>
+        </member>
+        <member name="M:Benlai.Common.Information.StringToUnicode(System.String)">
+            <summary>
+            将字符串转化为Unicode编码
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.Information.UnicodeToString(System.String)">
+            <summary>
+            将Unicode编码转化为字符串
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.Information.ToSqlLikeStringForParamers(System.String)">
+            <summary>
+            左右模糊查询 使用SqlParameter时调用此方法
+            </summary>
+            <param name="paramStr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.ToSqlLikeStringRForParamers(System.String)">
+            <summary>
+            右模糊查询 使用SqlParameter时调用此方法
+            </summary>
+            <param name="paramStr"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.ToSqlInString(System.Collections.ICollection)">
+            <summary>
+            就是一组数字或文字拼接到SQL文中的IN Clause中去。比如传入一个数组，得到拼接好的(a,b,c,d)之类的
+            </summary>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.ToSqlIn(System.Collections.ICollection)">
+            <summary>
+            就是一组数字或文字拼接到SQL文中的IN Clause中去。比如传入一个数组，得到拼接好的('a','b','c','d')之类的
+            </summary>
+            <param name="list"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.ToSqlEndDate(System.String)">
+            <summary>
+            传入的参数必须是'yyyy-MM-dd' 格式. 不另外检查
+            </summary>
+            <param name="paramDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.ToSqlStartDate(System.String)">
+            <summary>
+            传入的参数必须是'yyyy-MM-dd' 格式. 不另外检查
+            </summary>
+            <param name="paramDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.ToIsNullTimeString(System.String)">
+            <summary>
+            字符串 验证 是否空时间 返回时间格式字符串
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.IsDateTime(System.String)">
+            <summary>
+            判断是否是日期类型
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.ToTimeFormat(System.Nullable{System.DateTime},System.String)">
+            <summary>
+            对DateTime 返回格式化字符串
+            </summary>
+            <param name="time"></param>
+            <param name="customFormat">自定义日期格式</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.ToTimeFormat(System.Nullable{System.DateTime})">
+            <summary>
+            对DateTime 返回格式化字符串 yyyy-MM-dd HH:mm:ss
+            </summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.ToTimeFormat(System.DateTime,System.String)">
+            <summary>
+            对DateTime 返回格式化字符串
+            </summary>
+            <param name="time"></param>
+            <param name="customFormat">自定义日期格式</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.ToTimeFormat(System.DateTime)">
+            <summary>
+            对DateTime 返回格式化字符串 yyyy-MM-dd HH:mm:ss
+            </summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.TrimNull(System.Object,System.Boolean)">
+            <summary>
+            去空格
+            </summary>
+            <param name="obj">去空格的对象</param>
+            <param name="IsClearTrim">是否去掉全部空格</param>
+        </member>
+        <member name="M:Benlai.Common.Information.GetPwd(System.String)">
+            <summary>
+            密码加密方式
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.GetRandWordAll(System.Int32,System.Int32)">
+            <summary>
+            生成随机数字大小写字母
+            </summary>
+            <param name="pwdlen">长度</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.GetRandWordAllNo01lIOo(System.Int32,System.Int32)">
+            <summary>
+            生成随机数字大小写字母 排除难以识别的0,1,l,I,o,O
+            </summary>
+            <param name="pwdlen">长度</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.TruncMoneyAddOneJiao(System.Decimal)">
+            <summary>
+            舍去金额的分,直接舍去,然后加一毛钱    非四舍五入
+            </summary>
+            <param name="moneyValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.TruncMoney(System.Decimal)">
+            <summary>
+            舍去金额的分,直接舍去,非四舍五入
+            </summary>
+            <param name="moneyValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.TruncDdecimal(System.Decimal)">
+            <summary>
+            舍去小数位
+            </summary>
+            <param name="dec"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.TruncDdecimalCell(System.Decimal)">
+            <summary>
+            取整进位
+            </summary>
+            <param name="dec"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.IsPhoneNumber(System.String)">
+            <summary>
+            是否电话号码，区号-电话号码
+            </summary>
+            <param name="Phone"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.IsPasPhoneNumber(System.String)">
+            <summary>
+            是否是小灵通，区号电话号码
+            </summary>
+            <param name="Phone"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.IsCellNumber(System.String)">
+            <summary>
+            判断是否手机号码
+            </summary>
+            <param name="cell"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.NoHTML(System.String)">
+            <summary>
+            取出HTML标签
+            </summary>
+            <param name="Htmlstring"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.GetChineseMoney(System.Int32)">
+            <summary>
+            圆通保价金额转换
+            </summary>
+            <param name="moneyValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.DateDiff(System.DateTime,System.DateTime)">
+            <summary>
+            计算两个日期的时间间隔,返回天数
+            </summary>
+            <param name="DateTime1">第一个日期和时间</param>
+            <param name="DateTime2">第二个日期和时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.GetAbsoluteFilePath(System.String)">
+            <summary>
+            计算文件的绝对路径, 在类库中调用，一般是不能使用Server.MapPath的时候
+            </summary>
+            <param name="filePath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.GetFullUrl(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.IsUrl(System.String)">
+            <summary>
+            判断是否Url地址
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.GetIP(System.Boolean)">
+            <summary>
+            获取IP信息
+            </summary>
+            <param name="onlyFirstIp">是否只获取第一个默认获取所有</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.GetClientIp">
+            <summary>
+            只获取clientip ha需要配置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.GetServerVariables">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.IsXiagcIP">
+            <summary>
+            判断是否集团ip
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.GetClub">
+            <summary>
+            显示健身
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.IsDecimalNoLessThanZero(System.String)">
+            <summary>
+            decimal >= 0。空返回false
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.IsDecimalGreaterThanZero(System.String)">
+            <summary>
+            decimal > 0。空返回false
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.IsIntGreaterThanZero(System.String)">
+            <summary>
+            Int > 0 ，空返回false
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.IsIntNoLessThanZero(System.String)">
+            <summary>
+            Int >= 0。空返回false
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.SafeReplace(System.String)">
+            <summary>
+            消除是否有Sql危险字符
+            </summary>
+            <returns>True:存在</returns>
+        </member>
+        <member name="M:Benlai.Common.Information.FormatCSSPath(System.String)">
+            <summary>
+            格式化css路径
+            </summary>
+            <param name="cssPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.FormatScriptPath(System.String)">
+            <summary>
+            格式化script路径
+            </summary>
+            <param name="scriptPath"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.IsValidIp(System.String)">
+            <summary>
+            验证Ip地址
+            </summary>
+            <param name="Ip"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.GetMapPath(System.String)">
+            <summary>
+            获得当前绝对路径
+            </summary>
+            <param name="strPath">指定的路径</param>
+            <returns>绝对路径</returns>
+        </member>
+        <member name="M:Benlai.Common.Information.IsCrossSitePost">
+            <summary>
+            判断跨站提交
+            </summary>
+            <returns>True:跨站提交</returns>
+        </member>
+        <member name="M:Benlai.Common.Information.IsSafeSqlString(System.String)">
+            <summary>
+            检测是否有Sql危险字符
+            </summary>
+            <returns>True:存在</returns>
+        </member>
+        <member name="M:Benlai.Common.Information.IsGeneralSafeSqlString(System.String)">
+            <summary>
+            检测是否有Sql危险字符
+            </summary>
+            <returns>True:存在</returns>
+        </member>
+        <member name="M:Benlai.Common.Information.IsValidEmail(System.String)">
+            <summary>
+            检测是否为有效邮件地址格式
+            </summary>
+            <param name="strIn">输入邮件地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.IsValidMultipleEmail(System.String)">
+            <summary>
+            检测是否为多个邮箱，之间用英文;分隔
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.IsIdCard(System.String)">
+            <summary>
+            判断是否是正确的身份证
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.CreateDir(System.String)">
+            <summary>
+            建立文件夹
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.StreamWriter(System.String,System.String,System.Boolean)">
+            <summary>
+            保存文本
+            </summary>
+            <param name="DiskPath">磁盘文件路径</param>
+            <param name="text">文本</param>
+            <param name="isOverlay">是否覆盖(True-否追加到结尾,False-覆盖)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.GetHttpWebResponse(System.String,System.Text.Encoding)">
+            <summary>
+            http GET请求url包含参数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.CheckIsStaff(System.String)">
+            <summary>
+            检查是否为内部员工  add by yangxz
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.Information.ConvertExcelDateTimeIntoCLRDateTime(System.Object)">
+            <summary>
+            转换Excel文档中的日期数据
+            </summary>
+            <param name="value">日期数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.ToSqlDateTimeStr(System.DateTime)">
+            <summary>
+            转换成SQL的时间
+            </summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.enCode(System.String,System.String)">
+            <summary>
+            字符串编码
+            </summary>
+            <param name="str">需编码的字符串</param>
+            <param name="encoder">编码名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.ReplaceFirstEqual(System.String,System.String,System.String)">
+            <summary>
+            替换匹配的字符串
+            </summary>
+            <param name="SourceStr">原始字符串</param>
+            <param name="OldStr">须替换的字符串</param>
+            <param name="NewStr">替换的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.ConvertToDataSet``1(System.Collections.Generic.IList{``0})">
+            <summary> 
+            List转换成DataSet 
+            </summary> 
+            <typeparam name="T">类型</typeparam> 
+            <param name="list">将要转换的List</param> 
+            <returns></returns> 
+        </member>
+        <member name="M:Benlai.Common.Information.RemoveZero(System.Decimal)">
+            <summary>
+            去末尾0
+            </summary>
+            <param name="de"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.GetRequestPost">
+            <summary>
+            获取支付宝POST过来通知消息，并以“参数名=参数值”的形式组成数组
+            </summary>
+            <returns>request回来的信息组成的数组</returns>
+        </member>
+        <member name="M:Benlai.Common.Information.DataTrans(System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.GetRequestPostDic">
+            <summary>
+            获取支付宝POST过来通知消息，并以“参数名=参数值”的形式组成数组
+            </summary>
+            <returns>request回来的信息组成的数组</returns>
+        </member>
+        <member name="M:Benlai.Common.Information.GetVerify">
+            <summary>
+            获得验证码 6位随机数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.isNull(System.Object)">
+            <summary>
+            验证值是否无效
+            <para>无效值可以是DBNull,null,string.Empty,""</para>
+            </summary>
+            <param name="param">值</param>
+            <returns>是否有效</returns>
+        </member>
+        <member name="M:Benlai.Common.Information.SetDecimals(System.Decimal,System.Int32)">
+            <summary>
+            设置Decimal值小数位长度
+            </summary>
+            <param name="d">数值 [值小于0将返回0]</param>
+            <param name="decimals">小数位长度</param>
+            <returns>指定小数位长度的数值</returns>
+        </member>
+        <member name="M:Benlai.Common.Information.CheckValidationResult(System.Object,System.Security.Cryptography.X509Certificates.X509Certificate,System.Security.Cryptography.X509Certificates.X509Chain,System.Net.Security.SslPolicyErrors)">
+            <summary>
+            ssl握手校验，商户自行完成
+            </summary>
+            <param name="sender"></param>
+            <param name="certificate"></param>
+            <param name="chain"></param>
+            <param name="errors"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Benlai.Common.Information.RequestUrl(System.String)" -->
+        <member name="M:Benlai.Common.Information.RequestUrl(System.String,System.String,System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+            Post
+            </summary>
+            <param name="strURL"></param>
+            <param name="paraUrlCoded"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.RequestUrlGetByte(System.String,System.String,System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+            Post
+            </summary>
+            <param name="strURL"></param>
+            <param name="paraUrlCoded"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.EasySign(System.String,System.String)">
+            <summary>
+            简单加密
+            时间戳大写 MD5
+            结果+Key MD5 大写
+            </summary>
+            <param name="TimeStamp"></param>
+            <param name="vKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.GetSurname(System.String)">
+            <summary>
+            根据姓名 截取姓氏 ，名字隐藏
+            </summary>
+            <param name="Name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.GetSubCellPhone(System.String)">
+            <summary>
+            手机号码 前三位显示中间四位隐藏后四位显示 135****1234
+            </summary>
+            <param name="cellphone"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.SaveImage(System.String,System.String,System.Drawing.Bitmap)">
+            <summary>
+            保存二维码至文件夹
+            </summary>
+            <param name="File">物理路径 文件地址</param>
+            <param name="FileName">保存的文件名(aaa.jpg)</param>
+            <param name="Bitmap">图片流</param>
+        </member>
+        <member name="M:Benlai.Common.Information.GetUrlPost(System.String,System.Text.Encoding)">
+             <summary>
+             Post 请求
+             </summary>
+             <param name="url">url</param>
+            <param name="Type">编码格式</param>
+             <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.ConvertObjectToDecimal(System.Object)">
+            <summary>
+             把Object转换为Decimal,转换不了的返回0.00
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.ConvertStringToDecimal(System.String)">
+            <summary>
+            把字符转换为decimal,转换不了的返回0.00
+            </summary>
+            <param name="number"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.ConvertObjectToDateTime(System.Object)">
+            <summary>
+             把Object转换为DateTime,转换不了的返回1900-01-01 DateTime 对象
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Information.HttpRequestPost(System.String,System.String,System.String,System.IO.Stream,System.String)">
+            <summary>
+            FORM表单POST方式上传一个多媒体文件
+            </summary>
+            <param name="url">API URL</param>
+            <param name="typeName"></param>
+            <param name="fileName"></param>
+            <param name="fs"></param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Benlai.Common.Information.MoneyClass">
+            <summary>
+            金额类
+            </summary>
+        </member>
+        <member name="F:Benlai.Common.Information.MoneyClass.Tthousand">
+            <summary>
+            万
+            </summary>
+        </member>
+        <member name="F:Benlai.Common.Information.MoneyClass.Thousand">
+            <summary>
+            千
+            </summary>
+        </member>
+        <member name="F:Benlai.Common.Information.MoneyClass.Hundred">
+            <summary>
+            百
+            </summary>
+        </member>
+        <member name="F:Benlai.Common.Information.MoneyClass.Ten">
+            <summary>
+            拾
+            </summary>
+        </member>
+        <member name="F:Benlai.Common.Information.MoneyClass.Yuan">
+            <summary>
+            元
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.ShaEncryptionHelper.GetSHA1Hash(System.String)">
+            <summary>
+            获取SHA1加密
+            </summary>
+            <param name="text"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Benlai.Common.DESHelper">
+            <summary>
+             字符串加密帮助类
+             代码来源于网络
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.DESHelper.EncryptDES(System.String,System.String)">
+            <summary>
+            DES加密字符串
+            </summary>
+            <param name="encryptString">待加密的字符串  </param>
+            <param name="encryptKey">加密密钥,要求为8位 </param>
+            <returns>加密成功返回加密后的字符串，失败返回源串   </returns>
+        </member>
+        <member name="M:Benlai.Common.DESHelper.DecryptDES(System.String,System.String)">
+            <summary>
+            DES解密字符串   
+            </summary>
+            <param name="decryptString">待解密的字符串</param>
+            <param name="decryptKey">解密密钥,要求为8位,和加密密钥相同</param>
+            <returns>解密成功返回解密后的字符串，失败返源串</returns>
+        </member>
+        <member name="M:Benlai.Common.WmiAccess.GetObjects(System.String)">
+            <summary>
+            get the WMI object from the WMI database
+            </summary>
+            <param name="WQLCmd">WQL query command</param>
+            <returns>WMI object colleciton</returns>
+        </member>
+        <member name="M:Benlai.Common.WmiAccess.GetObject(System.String)">
+            <summary>
+            get a single WMI object from the WMI database
+            </summary>
+            <param name="WQLCmd">WQL query command</param>
+            <remarks>if the WQL query command return multi-objects, function will return the first WMI object in the collection</remarks>
+            <returns>single WMI object</returns>
+        </member>
+        <member name="T:Benlai.Common.XmlValueTypeEnum">
+            <summary>
+            获取节点对象的值的类型枚举
+            </summary>
+        </member>
+        <member name="T:Benlai.Common.XmlAccess">
+            <summary>
+            Xml文件操作对象
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.XmlAccess.GetXmlNodeValue(System.Xml.XmlNode,System.String,Benlai.Common.XmlValueTypeEnum,System.String)">
+            <summary>
+            通过XPath查询相应的值
+            </summary>
+            <param name="Node">Xml节点</param>
+            <param name="XPath">XPath查询</param>
+            <param name="XmlValueType">值类型</param>
+            <param name="Default">默认值</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Benlai.Common.XmlAccess.GetXmlNodeValue(System.Xml.XmlNode,System.String,Benlai.Common.XmlValueTypeEnum)">
+            <summary>
+            通过XPath查询相应的值
+            </summary>
+            <param name="Node">Xml节点</param>
+            <param name="XPath">XPath查询</param>
+            <param name="XmlValueType">值类型</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Benlai.Common.XmlAccess.GetXmlNodeValue(System.Xml.XmlNode,Benlai.Common.XmlValueTypeEnum,System.String)">
+            <summary>
+            获取指定节点的指定值
+            </summary>
+            <param name="Node">Xml节点</param>
+            <param name="XmlValueType">值类型</param>
+            <param name="Default">默认值</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Benlai.Common.XmlAccess.GetXmlNodeValue(System.Xml.XmlNode,Benlai.Common.XmlValueTypeEnum)">
+            <summary>
+            获取指定节点的指定值
+            </summary>
+            <param name="Node">Xml节点</param>
+            <param name="XmlValueType">值类型</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Benlai.Common.XmlAccess.GetXmlNodeValue(System.Xml.XmlNode)">
+            <summary>
+            获取指定节点的指定值
+            </summary>
+            <param name="Node">Xml节点</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Benlai.Common.XmlAccess.GetXmlNodeValue(System.Xml.XmlNode,System.String)">
+            <summary>
+            获取指定节点的指定值
+            </summary>
+            <param name="Node">Xml节点</param>
+            <param name="Default">默认值</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Benlai.Common.XmlAccess.SetXmlAttributeValue(System.Xml.XmlNode,System.String,System.String)">
+            <summary>
+            设置指定节点的属性值
+            </summary>
+            <param name="node">Xml节点</param>
+            <param name="attributeName">属性名</param>
+            <param name="value">值</param>
+        </member>
+        <member name="M:Benlai.Common.XmlAccess.SetXmlAttributeValue(System.Xml.XmlNode,System.String,System.String,System.Boolean)">
+            <summary>
+            设置指定节点的属性值
+            </summary>
+            <param name="node"></param>
+            <param name="attributeName"></param>
+            <param name="value"></param>
+            <param name="isEnabled"></param>
+        </member>
+        <member name="M:Benlai.Common.XmlAccess.XmlEncoding(System.String)">
+            <summary>
+            将字符串转换为符合Xml标准的字符串编码
+            </summary>
+            <param name="Source">源字符串</param>
+            <returns>Xml编码的字符串</returns>
+        </member>
+        <member name="T:Benlai.Common.XmlTransformer">
+            <summary>
+            XML与XSLT的转换对象
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.XmlTransformer.#ctor">
+            <summary>
+            创建一个XML与XSLT的转换对象
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.XmlTransformer.Convert(System.Xml.XmlReader,System.Xml.XmlReader)">
+            <summary>
+            转换XML内容
+            </summary>
+            <param name="XmlReader">Xml读取器</param>
+            <param name="XslReader">Xsl读取器</param>
+            <returns>转换后的结果</returns>
+        </member>
+        <member name="M:Benlai.Common.XmlTransformer.ConvertContent(System.String,System.String)">
+            <summary>
+            转换XML内容
+            </summary>
+            <param name="XmlUri">XML内容</param>
+            <param name="XslUri">XSL内容</param>
+            <returns>转换后的结果</returns>
+        </member>
+        <member name="M:Benlai.Common.XmlTransformer.Convert(System.String,System.String)">
+            <summary>
+            转换XML文件
+            </summary>
+            <param name="XmlUri">XML文件地址</param>
+            <param name="XslUri">XSL文件地址</param>
+            <returns>转换后的结果</returns>
+        </member>
+        <member name="M:Benlai.Common.XmlTransformer.Convert">
+            <summary>
+            转换XML文件
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.XmlTransformer.XmlUri">
+            <summary>
+            获取/设置XML代码文件
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.XmlTransformer.XslUri">
+            <summary>
+            获取/设置XSLT样式表代码文件
+            </summary>
+        </member>
+    </members>
+</doc>

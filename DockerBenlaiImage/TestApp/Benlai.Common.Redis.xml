@@ -1,0 +1,2372 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Benlai.Common.Redis</name>
+    </assembly>
+    <members>
+        <member name="P:Benlai.Common.Redis.AppConfigRedis.IsUseGZip">
+            <summary>
+            是否启用GZip压缩 1压缩（默认） 0不压缩
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.Redis.AppConfigRedis.UseGZipMinSize">
+            <summary>
+            使用Gzip压缩的起始字符串大小（kb）  最小为2kb
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.Redis.AppConfigRedis.IsWriteDataToOldKey">
+            <summary>
+            是否写入数据到OldKey中         
+            1写入  0不写（默认）
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.Redis.AppConfigRedis.IsWriteDataToNewKeyAsync">
+            <summary>
+            双写时是否异步写入数据到NewKey中 
+            1异步  0同步（默认）
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.Redis.AppConfigRedis.NewRedisKeyPrefix">
+            <summary>
+            NewKey的前缀
+            </summary>
+        </member>
+        <member name="F:Benlai.Common.Redis.AppConfigRedis._canUseNewRedisConnType">
+            <summary>
+            能够使用新版本Redis灰度发布的Redis的连接类型(DefaultConn，InventoryConn，CacheConn，CacheConnIAS，Safety)
+            只有配置了该配置 以下配置才会生效 CanReadDataFromNewKeyList 
+            需要重启
+            </summary>
+        </member>
+        <member name="F:Benlai.Common.Redis.AppConfigRedis._canReadDataFromNewKeyList">
+            <summary>
+            能够读取Redis的NewKey的列表 配置内多个key以逗号','分割
+            含有 AllRedisKeys -- 则代表所有的数据都从NewKey中读取 
+            </summary>
+        </member>
+        <member name="F:Benlai.Common.Redis.AppConfigRedis._canUseCodisConnType">
+            <summary>
+            能够使用Codis灰度发布的Redis的连接类型(DefaultConn，InventoryConn，CacheConn，CacheConnIAS，Safety)
+            只有配置了该配置 以下配置才会生效 CanUseCodisKeyList 
+            </summary>
+        </member>
+        <member name="F:Benlai.Common.Redis.AppConfigRedis._canUseCodisKeyList">
+            <summary>
+            能够使用Codis去进行读写操作的key列表 配置内多个key以逗号','分割
+            含有 AllRedisKeys -- 则代表所有的数据都从Codis进行读写操作Key中读取 
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.Redis.AppConfigRedis.RedisCanRemoveRangeMaxCount">
+            <summary>
+            使用ItemRemoveAll时 能够移除的最大Key的数量
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.Redis.ByteHexHelper.ByteToHex(System.Byte[])">
+            <summary>
+            字节数组转16进制字符串
+            </summary>
+            <param name="bytes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.ByteHexHelper.HexToByte(System.String)">
+            <summary>
+            16进制字符串转字节数组
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Benlai.Common.Redis.Managers">
+            <summary>
+            配置管理和初始化
+            </summary>
+        </member>
+        <member name="F:Benlai.Common.Redis.Managers.MaxReadCount">
+            <summary>
+            最大读数量
+            </summary>
+        </member>
+        <member name="F:Benlai.Common.Redis.Managers.MaxWriteCount">
+            <summary>
+            最大写数量
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.Redis.Managers.ClientManagers">
+            <summary>
+            过期时间
+            </summary>
+        </member>
+        <member name="F:Benlai.Common.Redis.Managers.ClientManagersCustom">
+            <summary>
+            自定义Redis连接池 
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.Redis.Managers.IntiClientManagersCache">
+            <summary>
+            前台缓存
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.Redis.Managers.IntiClientManagersCacheIAS">
+            <summary>
+            后台缓存
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.Redis.Managers.IntiClientManagers">
+            <summary>
+            session
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.Redis.Managers.IntiClientManagersInventory">
+            <summary>
+            库存
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.Redis.Managers.IntiClientManagersSafety">
+            <summary>
+            库存
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.Redis.Managers.IntiClientManagersCommon(Benlai.Common.Redis.RedisConnectionSource,ServiceStack.Redis.PooledRedisClientManager@)">
+            <summary>
+            通用初始化ClientManager
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.Redis.Managers.InitClientManagerCustom(System.String)">
+            <summary>
+            初始化自定义
+            </summary>
+            <param name="redisHost">传入的redis连接字符串</param>
+        </member>
+        <member name="T:Benlai.Common.Redis.BenlaiRedisClient`1">
+            <summary>
+            redis缓存客户端调用类
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.GetRedisClient(Benlai.Common.Redis.RedisConnectionSource)">
+            <summary>
+            根据传入的RedisConnectionSource 获取新的Redis的类的实体
+            </summary>
+            <param name="redisConn">redis连接类型</param>
+            <returns>新的Redis的类的实体</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.CombineNewKey(System.String)">
+            <summary>
+            组装新的Redis Key
+            </summary>
+            <param name="key">key</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.RestoreToOldKey(System.String)">
+            <summary>
+            将带前缀的新Key还原到oldkey
+            </summary>
+            <param name="newkey">key</param>
+            <returns></returns>
+        </member>
+        <member name="F:Benlai.Common.Redis.BenlaiRedisClient`1.IsWriteDataToOldKey">
+            <summary>
+            是否向OldKey内写入数据或删除数据 配置默认为1 写入
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.IsWriteDataToNewKey(Benlai.Common.Redis.RedisConnectionSource)">
+            <summary>
+            判断该Key是否可以使用Codis进行读写操作
+            </summary>
+            <param name="redisConn">原指定连接Redis的类型</param>
+            <returns>RedisConnectionSource</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.CanReadFromNewKey(System.String,Benlai.Common.Redis.RedisConnectionSource)">
+            <summary>
+            是否可以从新的Key中读取数据
+            </summary>
+            <param name="key">key</param>
+            <param name="redisConn"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.CanReadFromNewKey(System.Collections.Generic.List{System.String}@,System.Collections.Generic.List{System.String}@,Benlai.Common.Redis.RedisConnectionSource)">
+            <summary>
+            是否可以从新的Key中读取数据
+            </summary>
+            <param name="oldKeys">oldKeys</param>
+            <param name="newKeys">newKeys</param>
+            <param name="redisConn">redisConn</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.RunNewWriteFuncAsync(System.Func{System.Boolean},System.Boolean)">
+            <summary>
+            根据配置 IsWriteDataToNewKeyAsync 来判断写入新key的方法是否异步执行
+            </summary>
+            <param name="func">写入新Key的方法体</param>
+            
+            <returns>bool</returns>
+        </member>
+        <member name="F:Benlai.Common.Redis.BenlaiRedisClient`1.funcChangeCodisConn">
+            <summary>
+            切换为Codis的连接方式 公共逻辑
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.ValidateKeyCanUseCodis(System.String,Benlai.Common.Redis.RedisConnectionSource@)">
+            <summary>
+            判断该Key是否可以使用Codis进行读写操作
+            </summary>
+            <param name="key">待判断的Key</param>
+            <param name="redisConn">原指定连接Redis的类型</param>
+            <returns>RedisConnectionSource</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.ValidateKeyCanUseCodis(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String}@,System.Collections.Generic.List{System.String}@,Benlai.Common.Redis.RedisConnectionSource@)">
+            <summary>
+            判断该Key是否可以使用Codis进行读写操作
+            </summary>
+            <param name="oldkeys">待判断的Keys列表</param>
+            <param name="redisKeys">走redis的key列表</param>
+            <param name="codiskeys">走codis的key列表</param>
+            <param name="redisConn">原指定连接Redis的类型</param>
+            <returns>RedisConnectionSource</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.ValidateKeyCanUseCodis(System.Collections.Generic.Dictionary{System.String,`0},System.Collections.Generic.Dictionary{System.String,`0}@,System.Collections.Generic.Dictionary{System.String,`0}@,Benlai.Common.Redis.RedisConnectionSource@)">
+            <summary>
+            判断该Key是否可以使用Codis进行读写操作
+            </summary>
+            <param name="oldKVDic">待判断的KV列表</param>
+            <param name="redisKVDic">走redis的kv列表</param>
+            <param name="codisKVDic">走codis的kv列表</param>
+            <param name="redisConn">原指定连接Redis的类型</param>
+            <returns>RedisConnectionSource</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.HRemove(System.String,System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            删除哈希表 hashId 中的指定域 key，不存在的域将被忽略
+            </summary>
+            <param name="hashId">hashId</param>
+            <param name="key">hash内的指定域的key</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.HRemove(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            删除哈希表 typeof(T) 中的指定域 key，不存在的域将被忽略
+            </summary>
+            <param name="key">hash内的指定域的key</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns>bool</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.HSet(System.String,`0,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            将哈希表 typeof(T) 中的域 key 的值设为 value
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns>设置成功返回true 设置失败返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.HSet(System.String,`0,System.TimeSpan,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            将哈希表 typeof(T) 中的域 key 的值设为 value，并在指定时长后过期
+            </summary>
+            <param name="key">需要写入的主键,一般为对象ID值,必须是文本/数字等对象</param>
+            <param name="value">对象</param>
+            <param name="expiresTime">过期时间戳</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.KSet(System.String,`0,System.TimeSpan,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            为指定的key赋值 value,并在指定时长 expireIn 后过期
+            注意：该方法内的Value会被 JsonSerializerUnits.SerializeObject 转化为 string存储。故在KGet时的RedisDataType选择String
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <param name="expireIn">过期时间</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.KSet(System.String,`0,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            为指定的key赋值 value
+            注意：该方法内的Value会被 JsonSerializerUnits.SerializeObject 转化为 string存储。故在KGet时的RedisDataType选择String
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.KSet(System.Collections.Generic.Dictionary{System.String,`0},Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            批量为 多个key 赋各自对应的值 value
+            </summary>
+            <typeparam name="T">对象类别</typeparam>
+            <param name="kvDic">要写入的key/value集合</param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Benlai.Common.Redis.BenlaiRedisClient`1.KSet(System.String,`0,System.Nullable{System.TimeSpan},System.Nullable{System.DateTime},Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)" -->
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.KRemove(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            移除key对应的数据
+            </summary>
+            <param name="key">key</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.KRemoveAll(System.Collections.Generic.IEnumerable{System.String},Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            移除多个key各自对应的数据
+            </summary>
+            <param name="keyList">key列表</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.IncrementValue(System.String,System.Nullable{System.TimeSpan},System.Nullable{System.DateTime},Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            将key中储存的数字值增加 1
+            如设置过期时间 expiresTime与expiresDate二选一 都赋值以expiresTime为准
+            </summary>
+            <param name="key">key</param>
+            <param name="expiresTime">指定时长后过期</param>
+            <param name="expiresDate">指定时刻后过期</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.IncrementValue(System.String,System.Int32,System.Nullable{System.TimeSpan},System.Nullable{System.DateTime},Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            将key中储存的数字值增加 count
+            如设置过期时间 expiresTime与expiresDate二选一 都赋值以expiresTime为准
+            </summary>
+            <param name="key">key</param>
+            <param name="count">增量</param>
+            <param name="expiresTime">指定时长后过期</param>
+            <param name="expiresDate">指定时刻后过期</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.HGet(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            获取哈希表 typeof（T） 中给定域 key 的值
+            </summary>
+            <param name="key">需要获取的主键,一般为对象ID值</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.KIsExist(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            检查给定 key 是否存在
+            </summary>
+            <param name="key">key</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.GetTimeToLive(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            以秒为单位，返回给定key的剩余生存时间
+            </summary>
+            <param name="key">key</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns>TimeSpan</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.GetKeyType(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            获取key 类型
+            </summary>
+            <param name="key">key</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.KGet(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisDataType,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            获取key对应的值，key不存在则返回对应值的类型的默认值 -- default(T)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">key</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.KGet(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisDataType,Benlai.Common.Redis.RedisStoreType,Benlai.Common.Redis.RedisDataInfo@)">
+            <summary>
+            获取key对应的值，key不存在则返回对应值的类型的默认值 -- default(T)，同时输出当前获取到的Item数据的相关主要信息（是否新，值大小等）
+            该方法仅供内部调用
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">key</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <param name="dataType"></param>
+            <param name="redisDataInfo">数据的信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.KGet(System.Collections.Generic.IList{System.String},Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            获取多个Key各自对应得值，返回key：value的对应集合，key不存在则对应值的类型的默认值 -- default(T)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="keys">Key列表</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.KGetList(System.Collections.Generic.IList{System.String},Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            获取多个Key各自对应得值，返回value的集合，key不存在则对应值的类型的默认值 -- default(T)
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="keys">key列表</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.GetList(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            获取有序列表 listId 内的所有元素
+            </summary>
+            <param name="listId">listId</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.KSearchKeys(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            返回根据条件查找到的KEY对象列表
+            该方法只能在指定程序集内使用
+            为了支持Codis 故必须配置 RedisConnectionSearchKeys。多个Redis之间用 ‘,‘分割。      
+            </summary>
+            <param name="pattern"></param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.SearchKeys(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            模糊查询Key
+            该方法只能在指定程序集内使用
+            为了支持Codis 故必须配置 RedisConnectionSearchKeys。多个Redis之间用 ‘,‘分割。
+            </summary>
+            <param name="pattern">查询条件，若为空直接返回空的key集合</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.RedisUtils_KSearchKeys(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            只提供给Benlai.Application.Library.RedisUtilsManager项目使用该方法
+            </summary>
+            <param name="pattern">pattern</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.KSearchValues(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            返回根据条件查找到的value对象列表 
+            该方法只能在指定程序集内使用
+            为了支持Codis 故必须配置 RedisConnectionSearchKeys。多个Redis之间用 ‘,‘分割。     
+            </summary>
+            <param name="pattern"></param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.RedisUtils_KSearchValues(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            只提供给Benlai.Application.Library.RedisUtilsManager项目使用该方法       
+            </summary>
+            <param name="pattern"></param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.HASHSet(System.String,System.String,`0,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType,System.Nullable{System.TimeSpan},System.Nullable{System.DateTime})">
+            <summary>
+            将哈希表 hashId 中的域 key 的值设为 value
+            如设置过期时间 expiresTime与expiresDate二选一 都赋值以expiresTime为准
+            </summary>
+            <param name="hashId">hashId</param>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <param name="expiresTime">指定时长后过期</param>
+            <param name="expiresDate">指定时刻后过期</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.HASHIsExist(System.String,System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            查看哈希表 hashId 中，给定域 key 是否存在
+            </summary>
+            <param name="hashId">hashId</param>
+            <param name="key">key</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.SetKeyValue(System.String,System.String,System.TimeSpan,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            为指定的key赋值 value,并在指定时长 expireIn 后过期
+            </summary>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <param name="ts">过期时长</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.ContainsKey(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            检查给定 key 是否存在
+            </summary>
+            <param name="key">key</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.HASHGet(System.String,System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            获取哈希表 hashId 中给定域 key 的值
+            </summary>
+            <param name="hashId">hashId</param>
+            <param name="key">key</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.HASHGetCount(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            获取哈希表 hashId 中域(field)的数量
+            </summary>
+            <param name="hashId">hashId</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.GetHashKeys(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            获取哈希表 hashId 中的所有域的key
+            </summary>
+            <param name="hashId">hashId</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.GetAllEntriesFromHash(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            获取哈希表 hashId 中所有域的key：value,以Dictionary的字典类型返回
+            </summary>
+            <param name="hashId">hashId</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.GetAllEntriesFromHashWithRedisDataInfo(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            获取哈希表 hashId 中所有域的key：value,以Dictionary的字典类型返回，同时输出当前获取到的Hash数据的相关主要信息（是否新，值大小等）
+            该方法仅供内部调用
+            </summary>
+            <param name="hashId">hashId</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.SetRangeInHash(System.String,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,System.String}},System.Nullable{System.TimeSpan},System.Nullable{System.DateTime},Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            同时将多个 datakey-value (域-值)对 存储到哈希表 hashId 中
+            如设置过期时间 expiresTime与expiresDate二选一 都赋值以expiresTime为准
+            </summary>
+            <param name="hashId">hashId</param>
+            <param name="keyValuePairs"></param>
+            <param name="expiresTime">指定时长后过期</param>
+            <param name="expiresDate">指定时刻后过期</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.RemoveEntryFromHash(System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.DateTime},Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            删除哈希表 hashId 中的指定域 key
+            如设置过期时间 expiresTime与expiresDate二选一 都赋值以expiresTime为准
+            </summary>
+            <param name="hashId">hashId</param>
+            <param name="key">key</param>
+            <param name="expiresTime">指定时长后过期</param>
+            <param name="expiresDate">指定时刻后过期</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.AddRangeToSet(System.String,System.Collections.Generic.List{System.String},System.Nullable{System.TimeSpan},System.Nullable{System.DateTime},Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            将多个value 元素加入到无序集合 setId 当中
+            如设置过期时间 expiresTime与expiresDate二选一 都赋值以expiresTime为准
+            </summary>
+            <param name="setId">setId</param> 
+            <param name="items">items</param>
+            <param name="expiresTime">指定时长后过期</param>
+            <param name="expiresDate">指定时刻后过期</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.PopItemFromSet(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            移除并返回无序集合 setId 中的一个随机元素
+            </summary>
+            <param name="setId">setId</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.AddItemToSet(System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.DateTime},Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            将一个value 元素加入到无序集合 setId 当中
+            如设置过期时间 expiresTime与expiresDate二选一 都赋值以expiresTime为准
+            </summary>
+            <param name="setId">setId</param> 
+            <param name="value">value</param>
+            <param name="expiresTime">到期时间</param>
+            <param name="expiresDate">到期时间</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.IncrementItemInSortedSet(System.String,System.String,System.Double,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            为有序集 setId 的成员 value 的 score 值加上增量 incrementBy 返回增量后的score
+            </summary>
+            <param name="setId">setId</param>
+            <param name="value">value</param>
+            <param name="incrementBy"></param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.IncrementValueInHash(System.String,System.String,System.Int32,System.Nullable{System.TimeSpan},System.Nullable{System.DateTime},Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            为哈希表 hashId 中的域 key 的值 加上增量 count
+            如设置过期时间 expiresTime与expiresDate二选一 都赋值以expiresTime为准
+            </summary>
+            <param name="hashId">hashId</param>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <param name="expiresTime">指定时长后过期</param>
+            <param name="expiresDate">指定时刻后过期</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.SetContainsItem(System.String,System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            判断无序集合 setId 的成员内是否存在 value 元素
+            </summary>
+            <param name="setId">setId</param>
+            <param name="value">value</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.GetAllItemsFromSet(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            获取无序集合 setId 中的所有成员,以HashSet的类型返回结果
+            </summary>
+            <param name="setId">setId</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.GetAllItemsFromSet(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType,Benlai.Common.Redis.RedisDataInfo@)">
+            <summary>
+            获取无序集合 setId 中的所有成员,以HashSet的类型返回结果，同时输出当前获取到的无序集合数据的相关主要信息（是否新，值大小等）
+            该方法仅供内部调用
+            </summary>
+            <param name="setId">setId</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <param name="redisDataInfo">无序集合数据的相关信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.RemoveItemFromSet(System.String,System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            移除无序集合 setId 中的 value 元素
+            </summary>
+            <param name="setId">setId</param>
+            <param name="value">value</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.GetSetCount(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            获取指定无序集合setId内的成员数量
+            </summary>
+            <param name="setId">setId</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.PrependItemToList(System.String,System.String,System.Nullable{System.TimeSpan},System.Nullable{System.DateTime},Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            将一个 value 插入到列表 listId 的表头（左边）
+            如设置过期时间 expiresTime与expiresDate二选一 都赋值以expiresTime为准
+            </summary>
+            <param name="listId">listId</param>
+            <param name="value">value</param>
+            <param name="expiresTime">指定时长后过期</param>
+            <param name="expiresDate">指定时刻后过期</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.RemoveEndFromList(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            移除并返回列表 listId 的尾元素（右边）
+            </summary>
+            <param name="listId">listId</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.GetAllItemsFromList(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            获取列表listId内的所有元素
+            </summary>
+            <param name="listId">listId</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.GetAllItemsFromList(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType,Benlai.Common.Redis.RedisDataInfo@)">
+            <summary>
+            获取列表listId内的所有元素，同时输出当前获取到的列表数据的相关主要信息（是否新，值大小等）
+            该方法仅供内部调用
+            </summary>
+            <param name="listId">listId</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <param name="redisDataInfo">列表数据的相关信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.AddRangeToList(System.String,System.Collections.Generic.List{System.String},System.Nullable{System.TimeSpan},System.Nullable{System.DateTime},Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            将多个value 插入到列表 listId 的表尾(最右边)
+            如设置过期时间 expiresTime与expiresDate二选一 都赋值以expiresTime为准
+            </summary>
+            <param name="listId">listId</param>
+            <param name="values">values</param>
+            <param name="expiresTime">指定时长后过期</param>
+            <param name="expiresDate">指定时刻后过期</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.PopItemFromList(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            移除并返回列表 listId 的尾元素（右边）
+            </summary>
+            <param name="listId">listId</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.RemoveItemFromList(System.String,System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            移除列表 listId 中与 value 相等的元素
+            </summary>
+            <param name="listId">listId</param>
+            <param name="value">value</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.GetListCount(System.String,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            获取列表 listId 的元素个数
+            </summary>
+            <param name="listId">listId</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.TrimList(System.String,System.Int32,System.Int32,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            对一个列表进行修剪(trim)，就是说，让列表只保留指定区间[keepStartingFrom,keepEndingAt]内的元素，不在指定区间之内的元素都将被删除。
+            例如：list:{0,1,2,3,4,5}  TrimList(list,2,4) 操作后则list:{2,3,4}
+            </summary>
+            <param name="listId">列表的id</param>
+            <param name="keepStartingFrom">指定保留区间的起始位置（包含）</param>
+            <param name="keepEndingAt">指定保留区间的结束位置（包含）</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.KSetEntryIn(System.String,System.TimeSpan,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            设置key的数据在指定的时长后过期
+            </summary>
+            <param name="key">key</param>
+            <param name="expiresTime">指定时长后过期</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.KSetEntryAT(System.String,System.DateTime,Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            设置指定key的数据在指定时刻过期
+            </summary>
+            <param name="key">key</param>
+            <param name="expiresDate">指定时刻后过期</param>
+            <param name="redisConn">redis连接类型</param>
+            <param name="storeType">存储类型</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.TryRedisRead``1(System.Func{ServiceStack.Redis.IRedisClient,``0},Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            读取
+            </summary>
+            <typeparam name="F"></typeparam>
+            <param name="doRead"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.TryRedisRead``1(System.Func{ServiceStack.Redis.IRedisNativeClient,``0},Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            读取
+            </summary>
+            <typeparam name="F"></typeparam>
+            <param name="doRead"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.TryRedisWrite``1(System.Func{ServiceStack.Redis.IRedisClient,``0},Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            写入
+            </summary>
+            <typeparam name="F"></typeparam>
+            <param name="doWrite"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.TryRedisWrite``1(System.Func{ServiceStack.Redis.IRedisNativeClient,``0},Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType)">
+            <summary>
+            写入
+            </summary>
+            <typeparam name="F"></typeparam>
+            <param name="doWrite"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.TryRedisWrite``1(System.Func{ServiceStack.Redis.IRedisClient,``0},Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType,System.Boolean)">
+            <summary>
+            写入
+            </summary>
+            <typeparam name="F"></typeparam>
+            <param name="doWrite"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.BenlaiRedisClient`1.TryRedisWrite``1(System.Func{ServiceStack.Redis.IRedisNativeClient,``0},Benlai.Common.Redis.RedisConnectionSource,Benlai.Common.Redis.RedisStoreType,System.Boolean)">
+            <summary>
+            写入
+            </summary>
+            <typeparam name="F"></typeparam>
+            <param name="doWrite"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Benlai.Common.Redis.RedisEntityAchieve.CompressPlaceholderBytesLength">
+            <summary>
+            压缩占位符标签的Byte数组长度
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.GetValue``1(System.Byte[])">
+            <summary>
+            根据传入的byte[]获取对于的实体，可能会要进行GZip解压缩操作
+            </summary>
+            <typeparam name="T">待返回的值的类型</typeparam>
+            <param name="value">byte[]数组</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.GetValue``1(System.Byte[],Benlai.Common.Redis.RedisDataInfo@)">
+            <summary>
+            根据传入的byte[]获取对于的实体，可能会要进行GZip解压缩操作
+            </summary>
+            <typeparam name="T">待返回的值的类型</typeparam>
+            <param name="value">byte[]数组</param>
+            <param name="redisDataInfo">Redis数据信息</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ConvertValueToBytes``1(``0)">
+            <summary>
+            将Value转化为byte数组--可能会进行GZip对Value进行压缩后再返回对应得byte数组
+            压缩规则：根据配置是否Gzip压缩 （AppConfigRedis.IsUseGZip ） 以及value的大小是否达到 最低压缩阀值（ AppConfigRedis.UseGZipMinSize）
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="value">value</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ConvertToKeysBytes(System.String[])">
+            <summary>
+            将传入的key数组 转化为byte[]数组
+            </summary>
+            <param name="keys">keys</param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.AssertServerVersionNumber(ServiceStack.Redis.RedisNativeClient)">
+            <summary>
+            获取Redis服务的版本
+            </summary>
+            <param name="nRedis">redis本地客户端连接实体</param>
+            <returns>redis服务版本</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ReadWriteClient(Benlai.Common.Redis.RedisConnectionSource)">
+            <summary>
+            根据传入连接类型获取 ”写“IRedisClient
+            </summary>
+            <param name="redisConn"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ReadOnlyClient(Benlai.Common.Redis.RedisConnectionSource)">
+            <summary>
+            根据传入连接类型获取 ”读“IRedisClient
+            </summary>
+            <param name="redisConn"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SearchKeys(System.String,System.String)">
+            <summary>
+            返回根据传入的Redis连接和条件查找对应的KEY列表
+            该方法只能在指定程序集内使用
+            </summary>
+            <param name="pattern">查询条件，若为空直接返回空的key集合</param>
+            <param name="redisConnections">redis连接字符串，可多个用","隔开；例：127.0.0.1:6379,127.0.0.1:6389</param>
+            <returns>keys集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.AcquireLock(System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            获取并发锁，直到超时
+            </summary>
+            <param name="key">key </param>
+            <param name="timeOut">获取锁的超时时间</param>
+            <returns>IDisposable</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.AcquireLockImmediate(System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            获取并发锁，并立刻返回获取是否成功
+            </summary>
+            <param name="key"></param>
+            <returns>成功返回True 失败返回False</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.RemoveEntry(System.String[])">
+            <summary>
+            根据传入的key移除对应得数据
+            </summary>
+            <param name="keys">待移除数据的key</param>
+            <returns>移除成功返回true 移除失败返回false </returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ExpireEntryIn(System.String,System.TimeSpan)">
+            <summary>
+            设置key的数据在指定的时长后过期
+            </summary>
+            <param name="key">key</param>
+            <param name="expireIn">过期时长</param>
+            <returns>设置成功返回true 设置失败返回false </returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ExpireEntryAt(System.String,System.DateTime)">
+            <summary>
+            设置指定key的数据在指定时刻过期
+            </summary>
+            <param name="key">key</param>
+            <param name="expiresAt">过期时刻</param>
+            <returns>设置成功返回true 设置失败返回false </returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.GetTimeToLive(System.String)">
+            <summary>
+            以秒为单位，返回给定key的剩余生存时间
+            </summary>
+            <param name="key">key</param>
+            <returns>时间（秒）</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.GetKeyType(System.String)">
+            <summary>
+            返回key所储存的值的类型
+            </summary>
+            <param name="key">key</param>
+            <returns>RedisKeyType</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ContainsKey(System.String)">
+            <summary>
+            检查给定 key 是否存在
+            </summary>
+            <param name="key">key</param>
+            <returns>存在返回true 不存在返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SetBit(System.String,System.Int32,System.Int32)">
+            <summary>
+            对key所储存的字符串值，设置或清除指定偏移量上的位(bit)。
+            位的设置或清除取决于 value 参数，可以是 0 也可以是 1 。
+            当key不存在时，自动生成一个新的字符串值。
+            字符串会进行伸展(grown)以确保它可以将 value 保存在指定的偏移量上。当字符串值进行伸展时，空白位置以 0 填充。
+            offset 参数必须大于或等于 0 ，小于 2^32 (bit 映射被限制在 512 MB 之内)。
+            </summary>
+            <param name="key">key</param>
+            <param name="offset">偏移量 必须大于或等于 0</param>
+            <param name="value">value</param>
+            <returns>指定偏移量原来储存的位</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.GetBit(System.String,System.Int32)">
+            <summary>
+            对key所储存的字符串值，获取指定偏移量上的位(bit)。
+            当 offset 比字符串值的长度大，或者key不存在时，返回 0 
+            </summary>
+            <param name="key">key</param>
+            <param name="offset">偏移量</param>
+            <returns>字符串值指定偏移量上的位(bit)</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.BitCount(System.String)">
+            <summary>
+            获取key所储存的字符值内被设置为 1 的比特位的数量。
+            对一个不存在的key进行 BITCOUNT 操作，结果为 0
+            </summary>
+            <param name="key">key</param>
+            <returns>被设置为 1 的位的数量</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ItemSet``1(System.String,``0)">
+            <summary>
+            为指定的key赋值 value,key不存在则先新建key然后在对key赋值
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <returns>赋值成功返回true 赋值失败返回false </returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ItemSet``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            为指定的key赋值 value,key不存在则先新建key然后在对key赋值
+            同时必须指定key的过期时间
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <param name="expireIn">过期时间</param>
+            <returns>赋值成功返回true 赋值失败返回false </returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ItemSetAll``1(System.Collections.Generic.IDictionary{System.String,``0})">
+            <summary>
+            批量为 多个key 赋各自对应的值 value；key不存在 则先新建key然后在对key赋值
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="values">待设置的key：value 集合</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ItemGet``1(System.String)">
+            <summary>
+            获取key对应的值，key不存在则返回对应值的类型的默认值 -- default(T)
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ItemIncrement(System.String,System.UInt32)">
+            <summary>
+            将key中储存的数字值增加增量 increment。
+            如果key不存在，那么key的值会先被初始化为 0 ，然后再执行增值操作
+            </summary>
+            <param name="key">key</param>
+            <param name="increment">增加的数值</param>
+            <returns>加上 increment 之后， key 的值</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ItemIncrement(System.String,System.UInt32,System.TimeSpan)">
+            <summary>
+            将key中储存的数字值增加增量 increment。
+            如果key不存在，那么key的值会先被初始化为 0 ，然后再执行增值操作
+            同时必须指定key的过期时间
+            </summary>
+            <param name="key">key</param>
+            <param name="increment">增加的数值</param>
+            <param name="expireIn">过期时间</param>
+            <returns>加上 increment 之后， key 的值</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ItemDecrement(System.String,System.UInt32)">
+            <summary>
+            将 key 所储存的值减去减量 decrement 。
+            如果 key 不存在，那么 key 的值会先被初始化为 0 ，然后再执行减法操作
+            </summary>
+            <param name="key">key</param>
+            <param name="decrement">减去的数值</param>
+            <returns>减去 decrement 之后， key 的值</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ItemDecrement(System.String,System.UInt32,System.TimeSpan)">
+            <summary>
+            将 key 所储存的值减去减量 decrement 。
+            如果 key 不存在，那么 key 的值会先被初始化为 0 ，然后再执行减法操作
+            同时必须指定key的过期时间
+            </summary>
+            <param name="key">key</param>
+            <param name="decrement">减去的数值</param>
+            <param name="expireIn">过期时间</param>
+            <returns>减去 decrement 之后， key 的值</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ItemGetAll``1(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            获取多个Key各自对应得值，返回key：value的对应集合
+            key不存在则对应值的类型的默认值 -- default(T)
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="keys">keys</param>
+            <returns>IDictionary  key：value的对应集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ItemRemove(System.String)">
+            <summary>
+            移除key对应的数据
+            </summary>
+            <param name="key">key</param>
+            <returns>移除成功返回true 移除失败返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ItemRemoveAll(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            移除多个key各自对应的数据
+            </summary>
+            <param name="keys">keys</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ItemExist(System.String)">
+            <summary>
+            检查给定 key的Item 是否存在
+            </summary>
+            <param name="key">key</param>
+            <returns>存在返回true 不存在返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ListAddToHead``1(System.String,``0)">
+            <summary>
+            将一个value 插入到列表 key 的列表头(最左边)
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ListAddToHead``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            将一个value 插入到列表 key 的列表头(最左边)
+            同时必须指定key的过期时间
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <param name="expireIn">过期时间</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ListAddRangeToHead``1(System.String,System.Collections.Generic.List{``0})">
+            <summary>
+            将多个value 插入到列表 key 的列表头(最左边)
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="values">value的集合</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ListAddToEnd``1(System.String,``0)">
+            <summary>
+            将一个value 插入到列表 key 的列表尾(最右边)
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ListAddToEnd``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            将一个value 插入到列表 key 的列表尾(最右边)
+            同时必须指定key的过期时间
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <param name="expireIn">过期时间</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ListAddRangeToEnd``1(System.String,System.Collections.Generic.List{``0})">
+            <summary>
+            将多个value 插入到列表 key 的列表尾(最右边)
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="values">value的集合</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ListRemoveHead``1(System.String)">
+            <summary>
+            移除并返回列表 key 的列表头元素（最左边）
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ListRemoveEnd``1(System.String)">
+            <summary>
+            移除并返回列表 key 的列表尾元素（最右边）
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ListRemoveItem``1(System.String,``0)">
+            <summary>
+            移除列表 key中与 value 相等的元素
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <returns>移除成功返回true 移除失败返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ListRemoveAll``1(System.String)">
+            <summary>
+            移除列表 key内的所有元素
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ListRemoveTrim(System.String,System.Int32,System.Int32)">
+            <summary>
+            移除列表key中 除了从 keepStartingFrom 到 keepEndingAt的元素之外的其他所有元素
+            </summary>
+            <param name="key">key</param>
+            <param name="keepStartingFrom"></param>
+            <param name="keepEndingAt"></param>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ListRemove(System.String)">
+            <summary>
+            根据传入列表的key移除整个列表
+            </summary>
+            <param name="keys">待移除列表的key</param>
+            <returns>移除成功返回true 移除失败返回false </returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ListGetAll``1(System.String)">
+            <summary>
+            获取列表key内的所有元素
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>T的实体集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ListGetRange``1(System.String,System.Int32,System.Int32)">
+            <summary>
+            获取列表key中从第start个元素起长度为count的元素集合
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="start">待获取元素的起始索引值</param>
+            <param name="count">待获取元素的个数</param>
+            <returns>T的实体集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ListGetRangeFromSortedList``1(System.String,System.Int32,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            获取排序列表（默认升序）key中从第start个元素起长度为count的元素集合
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="start">待获取元素的起始索引值</param>
+            <param name="count">待获取元素的个数</param>
+            <param name="isAlpha">是否按照字典顺序排列非数字元素(默认false)</param>
+            <param name="isDesc">是否降序排序(默认false)</param>
+            <returns>T的实体集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ListCount(System.String)">
+            <summary>
+            获取列表Key的元素个数
+            </summary>
+            <param name="key">key</param>
+            <returns>元素个数</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.ListExist(System.String)">
+            <summary>
+            检查给定 key的列表 是否存在
+            </summary>
+            <param name="key">key</param>
+            <returns>存在返回true 不存在返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.HashExist(System.String)">
+            <summary>
+            检查给定 key的哈希表 是否存在
+            </summary>
+            <param name="key">key</param>
+            <returns>存在返回true 不存在返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.HashExistField(System.String,System.String)">
+            <summary>
+            查看哈希表 key 中，给定域 dataKey 是否存在
+            </summary>
+            <param name="key">key</param>
+            <param name="dataKey">dataKey</param>
+            <returns>存在返回true 不存在返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.HashSet``1(System.String,System.String,``0)">
+            <summary>
+            将哈希表 key 中的域 dataKey 的值设为 value
+            如果 key 不存在，一个新的哈希表被创建并进行 HashSet 操作
+            如果域 dataKey 已经存在于哈希表中，旧值将被覆盖
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="dataKey">dataKey</param>
+            <param name="value">value</param>
+            <returns>设置成功返回true 设置失败返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.HashSet``1(System.String,System.String,``0,System.TimeSpan)">
+            <summary>
+            将哈希表 key 中的域 dataKey 的值设为 value
+            如果 key 不存在，一个新的哈希表被创建并进行 HashSet 操作
+            如果域 dataKey 已经存在于哈希表中，旧值将被覆盖
+            同时必须指定key的过期时间
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="dataKey">dataKey</param>
+            <param name="value">value</param>
+            <param name="expireIn">过期时间</param>
+            <returns>设置成功返回true 设置失败返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.HashSetRange``1(System.String,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,``0}})">
+            <summary>
+            同时将多个 datakey-value (域-值)对设置到哈希表 key 中
+            如果 key 不存在，一个新的哈希表被创建并进行 HashSetRange 操作
+            如果域 dataKey 已经存在于哈希表中，旧值将被覆盖
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="keyValuePairs">dataKey：value的集合</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.HashRemoveField(System.String,System.String)">
+            <summary>
+            删除哈希表 key 中的指定域 dataKey，不存在的域将被忽略
+            </summary>
+            <param name="key">key</param>
+            <param name="dataKey">dataKey</param>
+            <returns>删除成功返回true 删除失败返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.HashRemove(System.String)">
+            <summary>
+            删除哈希表 key 内所有的域
+            </summary>
+            <param name="key">key</param>
+            <returns>删除成功返回true 删除失败返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.HashGet``1(System.String,System.String)">
+            <summary>
+            获取哈希表 key 中给定域 dataKey 的值
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="dataKey">dataKey</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.HashGets``1(System.String,System.String[])">
+            <summary>
+            获取哈希表 key 中，一个或多个给定域的值
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="dataKeys">dataKeys</param>
+            <returns>T的实体集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.HashGetAll``1(System.String)">
+            <summary>
+            获取哈希表 key 中所有域的值
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>T的实体集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.HashGetKeys(System.String)">
+            <summary>
+            获取哈希表 key 中的所有域的键
+            </summary>
+            <param name="key">key</param>
+            <returns>域的键集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.HashGetAllDictionary``1(System.String)">
+            <summary>
+            获取哈希表 key 中所有域的值,以Dictionary的字典类型返回
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>Dictionary</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.HashCount(System.String)">
+            <summary>
+            获取哈希表 key 中域的数量
+            </summary>
+            <param name="key">key</param>
+            <returns>域的数量</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.HashIncrementValue(System.String,System.String,System.Int32)">
+            <summary>
+            为哈希表 key 中的域 dataKey 的值加上增量 increment
+            </summary>
+            <param name="key">key</param>
+            <param name="dataKey"></param>
+            <param name="increment">增量</param>
+            <returns>加上 increment 之后， key 的值哈希表 key 中域 dataKey 的值</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.HashIncrementValue(System.String,System.String,System.Int32,System.TimeSpan)">
+            <summary>
+            为哈希表 key 中的域 dataKey 的值加上增量 increment
+            同时必须指定key的过期时间
+            </summary>
+            <param name="key">key</param>
+            <param name="dataKey"></param>
+            <param name="increment">增量</param>
+            <param name="expireIn">过期时间</param>
+            <returns>加上 increment 之后， key 的值哈希表 key 中域 dataKey 的值</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SetAdd``1(System.String,``0)">
+            <summary>
+            将一个value 元素加入到无序集合 key 当中，已经存在于无序集合的 value 元素将被忽略
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SetAdd``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            将一个value 元素加入到无序集合 key 当中，已经存在于无序集合的 value 元素将被忽略
+            同时必须指定key的过期时间
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <param name="expireIn">过期时间</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SetAddRange``1(System.String,System.Collections.Generic.List{``0})">
+            <summary>
+            将多个value 元素加入到无序集合 key 当中，已经存在于无序集合的 value 元素将被忽略
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="values">value的集合</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SetPop``1(System.String)">
+            <summary>
+            移除并返回无序集合 key 中的一个随机元素
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SetGetAll``1(System.String)">
+            <summary>
+            获取无序集合 key 中的所有成员,以HashSet的类型返回结果
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>HashSet</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SetRemoveMember``1(System.String,``0)">
+            <summary>
+            移除无序集合 key 中的 value 元素
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SetRemove(System.String)">
+            <summary>
+            根据传入无序集合的key移除整个无序集合
+            </summary>
+            <param name="keys">待移除无序集合的key</param>
+            <returns>移除成功返回true 移除失败返回false </returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SetCount(System.String)">
+            <summary>
+            获取无序集合key中元素的数量
+            </summary>
+            <param name="key">key</param>
+            <returns>集合的元素数量</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SetExist(System.String)">
+            <summary>
+            检查给定 key的无序集合 是否存在
+            </summary>
+            <param name="key">key</param>
+            <returns>存在返回true 不存在返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SetExistMember``1(System.String,``0)">
+            <summary>
+            判断无序集合 key 的成员内是否存在 value 元素
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <returns>存在返回true 不存在返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SortedSetAdd``1(System.String,``0,System.Int64)">
+            <summary>
+            将 value 元素及其排序值 score 加入到有序集 key 当中。
+            如果某个 value 已经是有序集的成员，那么更新这个 member 的 score 值，并通过重新插入这个 value 元素，来保证该 value 在正确的位置上
+             key 不存在，则创建一个空的有序集并执行 SortedSetAdd 操作
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <param name="score">value的排序值</param>
+            <returns>设置成功返回true 设置失败返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SortedSetAdd``1(System.String,``0,System.Int64,System.TimeSpan)">
+            <summary>
+            将 value 元素及其排序值 score 加入到有序集 key 当中。
+            如果某个 value 已经是有序集的成员，那么更新这个 member 的 score 值，并通过重新插入这个 value 元素，来保证该 value 在正确的位置上
+            key 不存在，则创建一个空的有序集并执行 SortedSetAdd 操作
+            同时必须指定key的过期时间
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <param name="score">value的排序值</param>
+            <param name="expireIn">过期时间</param>
+            <returns>设置成功返回true 设置失败返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SortedSetIncrement``1(System.String,``0,System.Int64)">
+            <summary>
+            为有序集 key 的成员 value 的 score 值加上增量 increment 返回增量后的score
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <param name="increment">增量值</param>
+            <returns>增加 increment后的score值</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SortedSetRemove``1(System.String,``0)">
+            <summary>
+            将value元素 从有序集key移除
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <returns>移除成功返回true 移除失败返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SortedSetGetAll``1(System.String)">
+            <summary>
+            获取有序集key中的所有元素
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>T的实体集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SortedSetGetAllDesc``1(System.String)">
+            <summary>
+            获取有序集key中的所有元素
+            其中成员的位置按 score 值递减(从大到小)来排列。
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>T的实体集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SortedSetGetRangeByLowestScore``1(System.String,System.Int64,System.Int64,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            获取有序集 key 中，所有 score 值介于 fromScore 和 toScore 之间(包括等于 fromScore 或 toScore )的成员。有序集成员按 score 值递增(从小到大)次序排列
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="fromScore">起始score值</param>
+            <param name="toScore">结束score值</param>
+            <param name="skip">跳过的元素数量</param>
+            <param name="take">获取的元素数量</param>
+            <returns>T的实体集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SortedSetGetRangeByHighestScore``1(System.String,System.Int64,System.Int64,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            获取有序集 key 中， 所有 score 值介于 fromScore 和 toScore 之间(包括等于 fromScore 或 toScore )的成员。有序集成员按 score 值递减(从大到小)的次序排列
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="fromScore">起始score值</param>
+            <param name="toScore">结束score值</param>
+            <param name="skip">跳过的元素数量</param>
+            <param name="take">获取的元素数量</param>
+            <returns>T的实体集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SortedSetCount(System.String,System.Int64,System.Int64)">
+            <summary>
+            获取有序集 key 中，score 值介于 fromScore 和 toScore 之间(包括等于 fromScore 或 toScore )的成员数量
+            </summary>
+            <param name="key">key</param>
+            <param name="fromScore">起始score值</param>
+            <param name="toScore">结束score值</param>
+            <returns>成员数量</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SortedSetRemoveRange(System.String,System.Int32,System.Int32)">
+            <summary>
+            移除有序集 key 中，指定排名(rank)区间内的所有成员，区间分别以下标参数 minRank 和 maxRank 指出，包含 minRank 和 maxRank 在内
+            </summary>
+            <param name="key">key</param>
+            <param name="minRank">区间起始排名</param>
+            <param name="maxRank">区间结束排名</param>
+            <returns>被移除的元素数量</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SortedSetRemoveRangeByScore(System.String,System.Int64,System.Int64)">
+            <summary>
+            移除有序集 key 中，所有 score 值介于 fromScore 和 toScore 之间(包括等于 fromScore 或 toScore )的成员
+            </summary>
+            <param name="key">key</param>
+            <param name="fromScore">起始score值</param>
+            <param name="toScore">结束score值</param>
+            <returns>被移除的元素数量</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SortedSetGetRangeDesc``1(System.String,System.Int32,System.Int32)">
+            <summary>
+            获取有序集 key 中，指定区间内的成员,其中成员的位置按 score 值递减(从大到小)来排列
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="start">区间的启示成员索引值</param>
+            <param name="count">区间成员的长度</param>
+            <returns>T的实体集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SortedSetGetAllWithScores``1(System.String)">
+            <summary>
+            获取有序集key内所有成员的值以及排序值，以IDictionary的字典类型返回（Key：成员值，Value：成员的排序值）
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>IDictionary</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SortedSetGetIndexDesc``1(System.String,``0)">
+            <summary>
+            获取有序集key中,value的索引值
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <returns>value的索引值</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisEntityAchieve.SortedSetUnion(System.String,System.String[])">
+            <summary>
+            计算给定的一个或多个有序集的并集，并将该并集(结果集)储存到 intoKey
+            </summary>
+            <param name="intoKey">结果集的Key</param>
+            <param name="keys">待合并的keys</param>
+            <returns>结果集中成员的数量</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.AcquireLock(System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            获取并发锁，直到超时
+            </summary>
+            <param name="key">key </param>
+            <param name="timeOut">获取锁的超时时间</param>
+            <returns>IDisposable</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.AcquireLockImmediate(System.String,System.Nullable{System.TimeSpan})">
+            <summary>
+            获取并发锁，并立刻返回获取是否成功
+            </summary>
+            <param name="key"></param>
+            <returns>成功返回True 失败返回False</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.RemoveEntry(System.String[])">
+            <summary>
+            根据传入的key移除对应得数据
+            </summary>
+            <param name="keys">待移除数据的key</param>
+            <returns>移除成功返回true 移除失败返回false </returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ExpireEntryIn(System.String,System.TimeSpan)">
+            <summary>
+            设置key的数据在指定的时长后过期
+            </summary>
+            <param name="key">key</param>
+            <param name="expireIn">过期时长</param>
+            <returns>设置成功返回true 设置失败返回false </returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ExpireEntryAt(System.String,System.DateTime)">
+            <summary>
+            设置指定key的数据在指定时刻过期
+            </summary>
+            <param name="key">key</param>
+            <param name="expiresAt">过期时刻</param>
+            <returns>设置成功返回true 设置失败返回false </returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.GetTimeToLive(System.String)">
+            <summary>
+            以秒为单位，返回给定key的剩余生存时间
+            </summary>
+            <param name="key">key</param>
+            <returns>时间（秒）</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.GetKeyType(System.String)">
+            <summary>
+            返回key所储存的值的类型
+            </summary>
+            <param name="key">key</param>
+            <returns>RedisKeyType</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ContainsKey(System.String)">
+            <summary>
+            检查给定 key 是否存在
+            </summary>
+            <param name="key">key</param>
+            <returns>存在返回true 不存在返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SetBit(System.String,System.Int32,System.Int32)">
+            <summary>
+            对key所储存的字符串值，设置或清除指定偏移量上的位(bit)。
+            位的设置或清除取决于 value 参数，可以是 0 也可以是 1 。
+            当key不存在时，自动生成一个新的字符串值。
+            字符串会进行伸展(grown)以确保它可以将 value 保存在指定的偏移量上。当字符串值进行伸展时，空白位置以 0 填充。
+            offset 参数必须大于或等于 0 ，小于 2^32 (bit 映射被限制在 512 MB 之内)。
+            </summary>
+            <param name="key">key</param>
+            <param name="offset">偏移量 必须大于或等于 0</param>
+            <param name="value">value</param>
+            <returns>指定偏移量原来储存的位</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.GetBit(System.String,System.Int32)">
+            <summary>
+            对key所储存的字符串值，获取指定偏移量上的位(bit)。
+            当 offset 比字符串值的长度大，或者key不存在时，返回 0 
+            </summary>
+            <param name="key">key</param>
+            <param name="offset">偏移量</param>
+            <returns>字符串值指定偏移量上的位(bit)</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.BitCount(System.String)">
+            <summary>
+            获取key所储存的字符值内被设置为 1 的比特位的数量。
+            对一个不存在的key进行 BITCOUNT 操作，结果为 0
+            </summary>
+            <param name="key">key</param>
+            <returns>被设置为 1 的位的数量</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ItemSet``1(System.String,``0)">
+            <summary>
+            为指定的key赋值 value,key不存在则先新建key然后在对key赋值
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <returns>赋值成功返回true 赋值失败返回false </returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ItemSet``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            为指定的key赋值 value,key不存在则先新建key然后在对key赋值
+            同时必须指定key的过期时间
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <param name="expireIn">过期时间</param>
+            <returns>赋值成功返回true 赋值失败返回false </returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ItemSetAll``1(System.Collections.Generic.IDictionary{System.String,``0})">
+            <summary>
+            批量为 多个key 赋各自对应的值 value；key不存在 则先新建key然后在对key赋值
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="values">待设置的key：value 集合</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ItemGet``1(System.String)">
+            <summary>
+            获取key对应的值，key不存在则返回对应值的类型的默认值 -- default(T)
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ItemGetAll``1(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            获取多个Key各自对应得值，返回key：value的对应集合
+            key不存在则对应值的类型的默认值 -- default(T)
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="keys">keys</param>
+            <returns>IDictionary  key：value的对应集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ItemRemove(System.String)">
+            <summary>
+            移除key对应的数据
+            </summary>
+            <param name="key">key</param>
+            <returns>移除成功返回true 移除失败返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ItemRemoveAll(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            移除多个key各自对应的数据
+            </summary>
+            <param name="keys">keys</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ItemIncrement(System.String,System.UInt32)">
+            <summary>
+            将key中储存的数字值增加增量 increment。
+            如果key不存在，那么key的值会先被初始化为 0 ，然后再执行增值操作
+            </summary>
+            <param name="key">key</param>
+            <param name="increment">增加的数值</param>
+            <returns>加上 increment 之后， key 的值</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ItemIncrement(System.String,System.UInt32,System.TimeSpan)">
+            <summary>
+            将key中储存的数字值增加增量 increment。
+            如果key不存在，那么key的值会先被初始化为 0 ，然后再执行增值操作
+            同时必须指定key的过期时间
+            </summary>
+            <param name="key">key</param>
+            <param name="increment">增加的数值</param>
+            <param name="expireIn">过期时间</param>
+            <returns>加上 increment 之后， key 的值</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ItemDecrement(System.String,System.UInt32)">
+            <summary>
+            将 key 所储存的值减去减量 decrement 。
+            如果 key 不存在，那么 key 的值会先被初始化为 0 ，然后再执行减法操作
+            </summary>
+            <param name="key">key</param>
+            <param name="decrement">减去的数值</param>
+            <returns>减去 decrement 之后， key 的值</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ItemDecrement(System.String,System.UInt32,System.TimeSpan)">
+            <summary>
+            将 key 所储存的值减去减量 decrement 。
+            如果 key 不存在，那么 key 的值会先被初始化为 0 ，然后再执行减法操作
+            同时必须指定key的过期时间
+            </summary>
+            <param name="key">key</param>
+            <param name="decrement">减去的数值</param>
+            <param name="expireIn">过期时间</param>
+            <returns>减去 decrement 之后， key 的值</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ItemExist(System.String)">
+            <summary>
+            检查给定 key的Item 是否存在
+            </summary>
+            <param name="key">key</param>
+            <returns>存在返回true 不存在返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ListAddToHead``1(System.String,``0)">
+            <summary>
+            将一个value 插入到列表 key 的列表头(最左边)
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ListAddToHead``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            将一个value 插入到列表 key 的列表头(最左边)
+            同时必须指定key的过期时间
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <param name="expireIn">过期时间</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ListAddRangeToHead``1(System.String,System.Collections.Generic.List{``0})">
+            <summary>
+            将多个value 插入到列表 key 的列表头(最左边)
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="values">value的集合</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ListAddToEnd``1(System.String,``0)">
+            <summary>
+            将一个value 插入到列表 key 的列表尾(最右边)
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ListAddToEnd``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            将一个value 插入到列表 key 的列表尾(最右边)
+            同时必须指定key的过期时间
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <param name="expireIn">过期时间</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ListAddRangeToEnd``1(System.String,System.Collections.Generic.List{``0})">
+            <summary>
+            将多个value 插入到列表 key 的列表尾(最右边)
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="values">value的集合</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ListRemoveItem``1(System.String,``0)">
+            <summary>
+            移除列表 key中与 value 相等的元素
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <returns>移除成功返回true 移除失败返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ListRemoveHead``1(System.String)">
+            <summary>
+            移除并返回列表 key 的列表头元素（最左边）
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ListRemoveEnd``1(System.String)">
+            <summary>
+            移除并返回列表 key 的列表尾元素（最右边）
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ListRemoveTrim(System.String,System.Int32,System.Int32)">
+            <summary>
+            移除列表key中 除了从 keepStartingFrom 到 keepEndingAt的元素之外的其他所有元素
+            </summary>
+            <param name="key">key</param>
+            <param name="keepStartingFrom"></param>
+            <param name="keepEndingAt"></param>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ListRemoveAll``1(System.String)">
+            <summary>
+            移除列表 key内的所有元素
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ListRemove(System.String)">
+            <summary>
+            根据传入列表的key移除整个列表
+            </summary>
+            <param name="keys">待移除列表的key</param>
+            <returns>移除成功返回true 移除失败返回false </returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ListGetAll``1(System.String)">
+            <summary>
+            获取列表key内的所有元素
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>T的实体集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ListGetRange``1(System.String,System.Int32,System.Int32)">
+            <summary>
+            获取列表key中从第start个元素起长度为count的元素集合
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="start">待获取元素的起始索引值</param>
+            <param name="count">待获取元素的个数</param>
+            <returns>T的实体集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ListGetRangeFromSortedList``1(System.String,System.Int32,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            获取排序列表（默认升序）key中从第start个元素起长度为count的元素集合
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="start">待获取元素的起始索引值</param>
+            <param name="count">待获取元素的个数</param>
+            <param name="isAlpha">是否按照字典顺序排列非数字元素(默认false)</param>
+            <param name="isDesc">是否降序排序(默认false)</param>
+            <returns>T的实体集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ListCount(System.String)">
+            <summary>
+            获取列表Key的元素个数
+            </summary>
+            <param name="key">key</param>
+            <returns>元素个数</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.ListExist(System.String)">
+            <summary>
+            检查给定 key的列表 是否存在
+            </summary>
+            <param name="key">key</param>
+            <returns>存在返回true 不存在返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.HashExist(System.String)">
+            <summary>
+            检查给定 key的哈希表 是否存在
+            </summary>
+            <param name="key">key</param>
+            <returns>存在返回true 不存在返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.HashExistField(System.String,System.String)">
+            <summary>
+            查看哈希表 key 中，给定域 dataKey 是否存在
+            </summary>
+            <param name="key">key</param>
+            <param name="dataKey">dataKey</param>
+            <returns>存在返回true 不存在返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.HashSet``1(System.String,System.String,``0)">
+            <summary>
+            将哈希表 key 中的域 dataKey 的值设为 value
+            如果 key 不存在，一个新的哈希表被创建并进行 HashSet 操作
+            如果域 dataKey 已经存在于哈希表中，旧值将被覆盖
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="dataKey">dataKey</param>
+            <param name="value">value</param>
+            <returns>设置成功返回true 设置失败返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.HashSet``1(System.String,System.String,``0,System.TimeSpan)">
+            <summary>
+            将哈希表 key 中的域 dataKey 的值设为 value
+            如果 key 不存在，一个新的哈希表被创建并进行 HashSet 操作
+            如果域 dataKey 已经存在于哈希表中，旧值将被覆盖
+            同时必须指定key的过期时间
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="dataKey">dataKey</param>
+            <param name="value">value</param>
+            <param name="expireIn">过期时间</param>
+            <returns>设置成功返回true 设置失败返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.HashSetRange``1(System.String,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{System.String,``0}})">
+            <summary>
+            同时将多个 datakey-value (域-值)对设置到哈希表 key 中
+            如果 key 不存在，一个新的哈希表被创建并进行 HashSetRange 操作
+            如果域 dataKey 已经存在于哈希表中，旧值将被覆盖
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="keyValuePairs">dataKey：value的集合</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.HashRemoveField(System.String,System.String)">
+            <summary>
+            删除哈希表 key 中的指定域 dataKey，不存在的域将被忽略
+            </summary>
+            <param name="key">key</param>
+            <param name="dataKey">dataKey</param>
+            <returns>删除成功返回true 删除失败返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.HashRemove(System.String)">
+            <summary>
+            删除哈希表 key 内所有的域
+            </summary>
+            <param name="key">key</param>
+            <returns>删除成功返回true 删除失败返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.HashGet``1(System.String,System.String)">
+            <summary>
+            获取哈希表 key 中给定域 dataKey 的值
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="dataKey">dataKey</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.HashGets``1(System.String,System.String[])">
+            <summary>
+            获取哈希表 key 中，一个或多个给定域的值
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="dataKeys">dataKeys</param>
+            <returns>T的实体集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.HashGetAll``1(System.String)">
+            <summary>
+            获取哈希表 key 中所有域的值
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>T的实体集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.HashGetKeys(System.String)">
+            <summary>
+            获取哈希表 key 中的所有域的键
+            </summary>
+            <param name="key">key</param>
+            <returns>域的键集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.HashGetAllDictionary``1(System.String)">
+            <summary>
+            获取哈希表 key 中所有域的值,以Dictionary的字典类型返回
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>Dictionary</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.HashCount(System.String)">
+            <summary>
+            获取哈希表 key 中域的数量
+            </summary>
+            <param name="key">key</param>
+            <returns>域的数量</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.HashIncrementValue(System.String,System.String,System.Int32)">
+            <summary>
+            为哈希表 key 中的域 dataKey 的值加上增量 increment
+            </summary>
+            <param name="key">key</param>
+            <param name="dataKey"></param>
+            <param name="increment">增量</param>
+            <returns>加上 increment 之后， key 的值哈希表 key 中域 dataKey 的值</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.HashIncrementValue(System.String,System.String,System.Int32,System.TimeSpan)">
+            <summary>
+            为哈希表 key 中的域 dataKey 的值加上增量 increment
+            同时必须指定key的过期时间
+            </summary>
+            <param name="key">key</param>
+            <param name="dataKey"></param>
+            <param name="increment">增量</param>
+            <param name="expireIn">过期时间</param>
+            <returns>加上 increment 之后， key 的值哈希表 key 中域 dataKey 的值</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SetAdd``1(System.String,``0)">
+            <summary>
+            将一个value 元素加入到无序集合 key 当中，已经存在于无序集合的 value 元素将被忽略
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SetAdd``1(System.String,``0,System.TimeSpan)">
+            <summary>
+            将一个value 元素加入到无序集合 key 当中，已经存在于无序集合的 value 元素将被忽略
+            同时必须指定key的过期时间
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <param name="expireIn">过期时间</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SetAddRange``1(System.String,System.Collections.Generic.List{``0})">
+            <summary>
+            将多个value 元素加入到无序集合 key 当中，已经存在于无序集合的 value 元素将被忽略
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="values">value的集合</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SetPop``1(System.String)">
+            <summary>
+            移除并返回无序集合 key 中的一个随机元素
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SetGetAll``1(System.String)">
+            <summary>
+            获取无序集合 key 中的所有成员,以HashSet的类型返回结果
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>HashSet</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SetExist(System.String)">
+            <summary>
+            检查给定 key的无序集合 是否存在
+            </summary>
+            <param name="key">key</param>
+            <returns>存在返回true 不存在返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SetExistMember``1(System.String,``0)">
+            <summary>
+            判断无序集合 key 的成员内是否存在 value 元素
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <returns>存在返回true 不存在返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SetRemoveMember``1(System.String,``0)">
+            <summary>
+            移除无序集合 key 中的 value 元素
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SetRemove(System.String)">
+            <summary>
+            根据传入无序集合的key移除整个无序集合
+            </summary>
+            <param name="keys">待移除无序集合的key</param>
+            <returns>移除成功返回true 移除失败返回false </returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SetCount(System.String)">
+            <summary>
+            获取无序集合key中元素的数量
+            </summary>
+            <param name="key">key</param>
+            <returns>集合的元素数量</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SortedSetAdd``1(System.String,``0,System.Int64)">
+            <summary>
+            将 value 元素及其排序值 score 加入到有序集 key 当中。
+            如果某个 value 已经是有序集的成员，那么更新这个 member 的 score 值，并通过重新插入这个 value 元素，来保证该 value 在正确的位置上
+             key 不存在，则创建一个空的有序集并执行 SortedSetAdd 操作
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <param name="score">value的排序值</param>
+            <returns>设置成功返回true 设置失败返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SortedSetAdd``1(System.String,``0,System.Int64,System.TimeSpan)">
+            <summary>
+            将 value 元素及其排序值 score 加入到有序集 key 当中。
+            如果某个 value 已经是有序集的成员，那么更新这个 member 的 score 值，并通过重新插入这个 value 元素，来保证该 value 在正确的位置上
+            key 不存在，则创建一个空的有序集并执行 SortedSetAdd 操作
+            同时必须指定key的过期时间
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <param name="score">value的排序值</param>
+            <param name="expireIn">过期时间</param>
+            <returns>设置成功返回true 设置失败返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SortedSetRemove``1(System.String,``0)">
+            <summary>
+            将value元素 从有序集key移除
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <returns>移除成功返回true 移除失败返回false</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SortedSetGetAll``1(System.String)">
+            <summary>
+            获取有序集key中的所有元素
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>T的实体集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SortedSetGetAllDesc``1(System.String)">
+            <summary>
+            获取有序集key中的所有元素
+            其中成员的位置按 score 值递减(从大到小)来排列。
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>T的实体集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SortedSetGetRangeByLowestScore``1(System.String,System.Int64,System.Int64,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            获取有序集 key 中，所有 score 值介于 fromScore 和 toScore 之间(包括等于 fromScore 或 toScore )的成员。有序集成员按 score 值递增(从小到大)次序排列
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="fromScore">起始score值</param>
+            <param name="toScore">结束score值</param>
+            <param name="skip">跳过的元素数量</param>
+            <param name="take">获取的元素数量</param>
+            <returns>T的实体集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SortedSetGetRangeByHighestScore``1(System.String,System.Int64,System.Int64,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            获取有序集 key 中， 所有 score 值介于 fromScore 和 toScore 之间(包括等于 fromScore 或 toScore )的成员。有序集成员按 score 值递减(从大到小)的次序排列
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="fromScore">起始score值</param>
+            <param name="toScore">结束score值</param>
+            <param name="skip">跳过的元素数量</param>
+            <param name="take">获取的元素数量</param>
+            <returns>T的实体集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SortedSetCount(System.String,System.Int64,System.Int64)">
+            <summary>
+            获取有序集 key 中，score 值介于 fromScore 和 toScore 之间(包括等于 fromScore 或 toScore )的成员数量
+            </summary>
+            <param name="key">key</param>
+            <param name="fromScore">起始score值</param>
+            <param name="toScore">结束score值</param>
+            <returns>成员数量</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SortedSetRemoveRange(System.String,System.Int32,System.Int32)">
+            <summary>
+            移除有序集 key 中，指定排名(rank)区间内的所有成员，区间分别以下标参数 minRank 和 maxRank 指出，包含 minRank 和 maxRank 在内
+            </summary>
+            <param name="key">key</param>
+            <param name="minRank">区间起始排名</param>
+            <param name="maxRank">区间结束排名</param>
+            <returns>被移除的元素数量</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SortedSetRemoveRangeByScore(System.String,System.Int64,System.Int64)">
+            <summary>
+            移除有序集 key 中，所有 score 值介于 fromScore 和 toScore 之间(包括等于 fromScore 或 toScore )的成员
+            </summary>
+            <param name="key">key</param>
+            <param name="fromScore">起始score值</param>
+            <param name="toScore">结束score值</param>
+            <returns>被移除的元素数量</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SortedSetGetRangeDesc``1(System.String,System.Int32,System.Int32)">
+            <summary>
+            获取有序集 key 中，指定区间内的成员,其中成员的位置按 score 值递减(从大到小)来排列
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="start">区间的启示成员索引值</param>
+            <param name="count">区间成员的长度</param>
+            <returns>T的实体集合</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SortedSetGetAllWithScores``1(System.String)">
+            <summary>
+            获取有序集key内所有成员的值以及排序值，以IDictionary的字典类型返回（Key：成员值，Value：成员的排序值）
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <returns>IDictionary</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SortedSetGetIndexDesc``1(System.String,``0)">
+            <summary>
+            获取有序集key中,value的索引值
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <returns>value的索引值</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SortedSetIncrement``1(System.String,``0,System.Int64)">
+            <summary>
+            为有序集 key 的成员 value 的 score 值加上增量 increment 返回增量后的score
+            </summary>
+            <typeparam name="T">value的类型</typeparam>
+            <param name="key">key</param>
+            <param name="value">value</param>
+            <param name="increment">增量值</param>
+            <returns>增加 increment后的score值</returns>
+        </member>
+        <member name="M:Benlai.Common.Redis.IRedisEntity.SortedSetUnion(System.String,System.String[])">
+            <summary>
+            计算给定的一个或多个有序集的并集，并将该并集(结果集)储存到 intoKey
+            </summary>
+            <param name="intoKey">结果集的Key</param>
+            <param name="keys">待合并的keys</param>
+            <returns>结果集中成员的数量</returns>
+        </member>
+        <member name="P:Benlai.Common.Redis.RedisDataInfo.IsNew">
+            <summary>
+            是否是新的Redis
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.Redis.RedisDataInfo.IsCompress">
+            <summary>
+            是否压缩值
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.Redis.RedisDataInfo.CompressSize">
+            <summary>
+            压缩后的大小
+            </summary>
+        </member>
+        <member name="P:Benlai.Common.Redis.RedisDataInfo.Size">
+            <summary>
+            解压后或者原始大小
+            </summary>
+        </member>
+        <member name="M:Benlai.Common.Redis.RedisExtensions.ToHostAndPassword(System.String)">
+            <summary>
+            拆分传入的 Host 
+            passward：item1
+            host：item2
+            port：item3
+            </summary>
+            <param name="host">传入Host</param>
+            <returns>拆分后的Host信息组合</returns>
+        </member>
+    </members>
+</doc>
